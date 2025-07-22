@@ -1,11 +1,22 @@
+import { useState } from "react";
 import { Plus, Edit, Trash2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SearchBar } from "@/components/admin/SearchBar";
+import { PlayerDialog } from "@/components/admin/dialogs/PlayerDialog";
+import { useToast } from "@/hooks/use-toast";
 
 export function PlayersView() {
-  const players = [
+  const { toast } = useToast();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [countryFilter, setCountryFilter] = useState("all");
+  const [positionFilter, setPositionFilter] = useState("all");
+  const [playerDialogOpen, setPlayerDialogOpen] = useState(false);
+  const [editingPlayer, setEditingPlayer] = useState<any>(null);
+  
+  const [players, setPlayers] = useState([
     {
       id: 1,
       name: "Carlos Rodriguez",
@@ -36,14 +47,52 @@ export function PlayersView() {
       status: "Available",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
     }
-  ];
+  ]);
+
+  const filteredPlayers = players.filter(player => {
+    const matchesSearch = player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         player.club.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         player.country.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCountry = countryFilter === "all" || player.country.toLowerCase().includes(countryFilter.toLowerCase());
+    const matchesPosition = positionFilter === "all" || player.position.toLowerCase() === positionFilter.toLowerCase();
+    
+    return matchesSearch && matchesCountry && matchesPosition;
+  });
+
+  const handleAddPlayer = (playerData: any) => {
+    if (editingPlayer) {
+      setPlayers(players.map(p => p.id === editingPlayer.id ? { ...playerData, id: editingPlayer.id } : p));
+      setEditingPlayer(null);
+    } else {
+      setPlayers([...players, { ...playerData, id: players.length + 1 }]);
+    }
+  };
+
+  const handleEditPlayer = (player: any) => {
+    setEditingPlayer(player);
+    setPlayerDialogOpen(true);
+  };
+
+  const handleDeletePlayer = (playerId: number) => {
+    setPlayers(players.filter(p => p.id !== playerId));
+    toast({
+      title: "Player Deleted",
+      description: "Player has been removed successfully",
+    });
+  };
 
   return (
     <div className="space-y-6">
-      {/* Filters and Actions */}
+      {/* Search and Filters */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Select>
+          <SearchBar 
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Search players..."
+            className="w-80"
+          />
+          <Select value={countryFilter} onValueChange={setCountryFilter}>
             <SelectTrigger className="w-40">
               <SelectValue placeholder="All Countries" />
             </SelectTrigger>
@@ -56,7 +105,7 @@ export function PlayersView() {
             </SelectContent>
           </Select>
           
-          <Select>
+          <Select value={positionFilter} onValueChange={setPositionFilter}>
             <SelectTrigger className="w-40">
               <SelectValue placeholder="All Positions" />
             </SelectTrigger>
@@ -70,18 +119,18 @@ export function PlayersView() {
           </Select>
         </div>
         
-        <Button>
+        <Button onClick={() => setPlayerDialogOpen(true)} className="bg-[hsl(210,74%,55%)] text-[hsl(var(--muted))]">
           <Plus className="h-4 w-4 mr-2" />
           Add Player
         </Button>
       </div>
       
       {/* Players Table */}
-      <Card>
+      <Card className="border-0 shadow-md">
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-muted/50">
+              <thead className="bg-[hsl(var(--muted))]/50">
                 <tr>
                   <th className="text-left p-4 font-medium">Player</th>
                   <th className="text-left p-4 font-medium">Position</th>
@@ -92,8 +141,8 @@ export function PlayersView() {
                 </tr>
               </thead>
               <tbody>
-                {players.map((player) => (
-                  <tr key={player.id} className="border-t border-border hover:bg-muted/50">
+                {filteredPlayers.map((player) => (
+                  <tr key={player.id} className="border-t border-border hover:bg-[hsl(var(--muted))]/50">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         <img 
@@ -103,7 +152,7 @@ export function PlayersView() {
                         />
                         <div>
                           <p className="font-medium">{player.name}</p>
-                          <p className="text-sm text-muted-foreground">Age {player.age}</p>
+                          <p className="text-sm text-[hsl(var(--muted-foreground))]">Age {player.age}</p>
                         </div>
                       </div>
                     </td>
@@ -120,10 +169,10 @@ export function PlayersView() {
                     </td>
                     <td className="p-4">
                       <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" onClick={() => handleEditPlayer(player)}>
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" onClick={() => handleDeletePlayer(player.id)}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -135,6 +184,16 @@ export function PlayersView() {
           </div>
         </CardContent>
       </Card>
+
+      <PlayerDialog
+        open={playerDialogOpen}
+        onOpenChange={(open) => {
+          setPlayerDialogOpen(open);
+          if (!open) setEditingPlayer(null);
+        }}
+        player={editingPlayer}
+        onSave={handleAddPlayer}
+      />
     </div>
   );
 }

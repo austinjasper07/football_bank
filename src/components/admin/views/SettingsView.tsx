@@ -9,7 +9,7 @@ export function SettingsView() {
   return (
     <div className="space-y-6 max-w-4xl">
       {/* General Settings */}
-      <Card>
+      <Card className="border-0 shadow-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Globe className="h-5 w-5" />
@@ -35,7 +35,7 @@ export function SettingsView() {
       </Card>
 
       {/* Security Settings */}
-      <Card>
+      <Card className="border-0 shadow-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Shield className="h-5 w-5" />
@@ -46,14 +46,14 @@ export function SettingsView() {
           <div className="flex items-center justify-between">
             <div>
               <Label>Two-Factor Authentication</Label>
-              <p className="text-sm text-muted-foreground">Enable 2FA for admin accounts</p>
+              <p className="text-sm text-[hsl(var(--muted-foreground))]">Enable 2FA for admin accounts</p>
             </div>
             <Switch />
           </div>
           <div className="flex items-center justify-between">
             <div>
               <Label>Auto Logout</Label>
-              <p className="text-sm text-muted-foreground">Automatically logout inactive sessions</p>
+              <p className="text-sm text-[hsl(var(--muted-foreground))]">Automatically logout inactive sessions</p>
             </div>
             <Switch defaultChecked />
           </div>
@@ -61,7 +61,7 @@ export function SettingsView() {
       </Card>
 
       {/* API Settings */}
-      <Card>
+      <Card className="border-0 shadow-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Database className="h-5 w-5" />
@@ -81,7 +81,7 @@ export function SettingsView() {
       </Card>
 
       {/* Email Settings */}
-      <Card>
+      <Card className="border-0 shadow-sm">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Mail className="h-5 w-5" />

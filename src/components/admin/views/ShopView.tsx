@@ -38,48 +38,48 @@ export function ShopView() {
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Package className="h-8 w-8 text-blue-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Total Products</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Total Products</p>
                 <p className="text-2xl font-bold">156</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Package className="h-8 w-8 text-green-500" />
               <div>
-                <p className="text-sm text-muted-foreground">In Stock</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">In Stock</p>
                 <p className="text-2xl font-bold">134</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Package className="h-8 w-8 text-red-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Out of Stock</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Out of Stock</p>
                 <p className="text-2xl font-bold">22</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Package className="h-8 w-8 text-yellow-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Low Stock</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Low Stock</p>
                 <p className="text-2xl font-bold">8</p>
               </div>
             </div>
@@ -88,7 +88,7 @@ export function ShopView() {
       </div>
 
       {/* Products Table */}
-      <Card>
+      <Card className="border-0 shadow-sm">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle>Products</CardTitle>
@@ -101,7 +101,7 @@ export function ShopView() {
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-muted/50">
+              <thead className="bg-[hsl(var(--muted))]/50">
                 <tr>
                   <th className="text-left p-4 font-medium">Product</th>
                   <th className="text-left p-4 font-medium">Category</th>
@@ -113,7 +113,7 @@ export function ShopView() {
               </thead>
               <tbody>
                 {products.map((product) => (
-                  <tr key={product.id} className="border-t border-border hover:bg-muted/50">
+                  <tr key={product.id} className="border-t border-[hsl(var(--border))] hover:bg-[hsl(var(--muted))]/50">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         <img 

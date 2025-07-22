@@ -11,6 +11,7 @@ import { OrdersView } from "@/components/admin/views/OrdersView";
 import { BlogView } from "@/components/admin/views/BlogView";
 import { MessagesView } from "@/components/admin/views/MessagesView";
 import { SettingsView } from "@/components/admin/views/SettingsView";
+import { AffiliateView } from "@/components/admin/views/AffiliateView";
 
 export type AdminView = 
   | 'dashboard' 
@@ -21,6 +22,7 @@ export type AdminView =
   | 'orders' 
   | 'blog' 
   | 'messages' 
+  | 'affiliate'
   | 'settings';
 
 const AdminDashboard = () => {
@@ -44,6 +46,8 @@ const AdminDashboard = () => {
         return <BlogView />;
       case 'messages':
         return <MessagesView />;
+      case 'affiliate':
+        return <AffiliateView />;
       case 'settings':
         return <SettingsView />;
       default:
@@ -61,13 +65,14 @@ const AdminDashboard = () => {
       orders: { title: 'Orders', subtitle: 'View and process customer orders' },
       blog: { title: 'Blog', subtitle: 'Create and manage blog content' },
       messages: { title: 'Messages', subtitle: 'Handle customer communications' },
+      affiliate: { title: 'Affiliate Marketing', subtitle: 'Manage affiliates and track commissions' },
       settings: { title: 'Settings', subtitle: 'Configure system preferences' },
     };
     return titles[activeView];
   };
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen bg-[hsl(var(--background))]">
       <AdminSidebar activeView={activeView} onViewChange={setActiveView} />
       
       <div className="flex-1 flex flex-col overflow-hidden">

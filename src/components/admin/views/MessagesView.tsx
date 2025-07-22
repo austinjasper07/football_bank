@@ -57,48 +57,48 @@ export function MessagesView() {
     <div className="space-y-6">
       {/* Message Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Clock className="h-8 w-8 text-red-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Unread</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Unread</p>
                 <p className="text-2xl font-bold">5</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Star className="h-8 w-8 text-yellow-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Starred</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Starred</p>
                 <p className="text-2xl font-bold">12</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Archive className="h-8 w-8 text-blue-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Archived</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Archived</p>
                 <p className="text-2xl font-bold">48</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Reply className="h-8 w-8 text-green-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Replied</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Replied</p>
                 <p className="text-2xl font-bold">156</p>
               </div>
             </div>
@@ -107,7 +107,7 @@ export function MessagesView() {
       </div>
 
       {/* Messages List */}
-      <Card>
+      <Card className="border-0 shadow-md">
         <CardHeader>
           <CardTitle>Messages</CardTitle>
         </CardHeader>
@@ -116,8 +116,8 @@ export function MessagesView() {
             {messages.map((message) => (
               <div 
                 key={message.id} 
-                className={`p-4 rounded-lg border hover:bg-muted/50 cursor-pointer ${
-                  !message.isRead ? 'bg-muted/30 border-primary/20' : 'bg-background'
+                className={`p-4 rounded-lg border hover:bg-[hsl(var(--muted))]/50 cursor-pointer ${
+                  !message.isRead ? 'bg-[hsl(var(--muted))]/30 border-[hsl(var(--primary))]/20' : 'bg-[hsl(var(--background))]'
                 }`}
               >
                 <div className="flex items-start justify-between mb-2">
@@ -127,14 +127,14 @@ export function MessagesView() {
                       <p className={`font-medium ${!message.isRead ? 'font-semibold' : ''}`}>
                         {message.sender}
                       </p>
-                      <p className="text-sm text-muted-foreground">{message.email}</p>
+                      <p className="text-sm text-[hsl(var(--muted-foreground))]">{message.email}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     {message.isStarred && (
                       <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                     )}
-                    <span className="text-sm text-muted-foreground">{message.timestamp}</span>
+                    <span className="text-sm text-[hsl(var(--muted-foreground))]">{message.timestamp}</span>
                   </div>
                 </div>
                 
@@ -142,7 +142,7 @@ export function MessagesView() {
                   {message.subject}
                 </h3>
                 
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                <p className="text-sm text-[hsl(var(--muted-foreground))] mb-3 line-clamp-2">
                   {message.preview}
                 </p>
                 

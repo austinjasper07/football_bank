@@ -67,48 +67,48 @@ export function OrdersView() {
     <div className="space-y-6">
       {/* Order Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Package className="h-8 w-8 text-yellow-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Pending Orders</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Pending Orders</p>
                 <p className="text-2xl font-bold">23</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <Truck className="h-8 w-8 text-blue-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Shipped</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Shipped</p>
                 <p className="text-2xl font-bold">56</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <CheckCircle className="h-8 w-8 text-green-500" />
               <div>
-                <p className="text-sm text-muted-foreground">Delivered</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Delivered</p>
                 <p className="text-2xl font-bold">142</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-0 shadow-sm">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <Package className="h-8 w-8 text-primary" />
+              <Package className="h-8 w-8 text-[hsl(var(--primary))]" />
               <div>
-                <p className="text-sm text-muted-foreground">Total Orders</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))]">Total Orders</p>
                 <p className="text-2xl font-bold">221</p>
               </div>
             </div>
@@ -117,14 +117,14 @@ export function OrdersView() {
       </div>
 
       {/* Orders Table */}
-      <Card>
+      <Card className="border-0 shadow-sm">
         <CardHeader>
           <CardTitle>Recent Orders</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-muted/50">
+              <thead className="bg-[hsl(var(--muted))]/50">
                 <tr>
                   <th className="text-left p-4 font-medium">Order ID</th>
                   <th className="text-left p-4 font-medium">Customer</th>
@@ -137,14 +137,14 @@ export function OrdersView() {
               </thead>
               <tbody>
                 {orders.map((order) => (
-                  <tr key={order.id} className="border-t border-border hover:bg-muted/50">
+                  <tr key={order.id} className="border-t border-border hover:bg-[hsl(var(--muted))]/50">
                     <td className="p-4">
                       <span className="font-mono text-sm">{order.id}</span>
                     </td>
                     <td className="p-4">
                       <div>
                         <p className="font-medium">{order.customer}</p>
-                        <p className="text-sm text-muted-foreground">{order.email}</p>
+                        <p className="text-sm text-[hsl(var(--muted-foreground))]">{order.email}</p>
                       </div>
                     </td>
                     <td className="p-4">{order.items} items</td>
@@ -155,7 +155,7 @@ export function OrdersView() {
                         <span className="ml-1">{order.status}</span>
                       </Badge>
                     </td>
-                    <td className="p-4 text-sm text-muted-foreground">{order.date}</td>
+                    <td className="p-4 text-sm text-[hsl(var(--muted-foreground))]">{order.date}</td>
                     <td className="p-4">
                       <Button variant="ghost" size="sm">
                         <Eye className="h-4 w-4" />

@@ -15,7 +15,7 @@ export default function ClientLayoutWrapper({ children }: { children: React.Reac
         !isAdminPage && <Header />
       }
       
-      <main className={`${isAdminPage ? 'max-w-full px-12' : 'max-w-6xl px-4 lg:px-0'} mx-auto `}>
+      <main className={`${isAdminPage ? 'max-w-full' : 'max-w-6xl px-4 lg:px-0'} mx-auto `}>
         {children}
       </main>
       {

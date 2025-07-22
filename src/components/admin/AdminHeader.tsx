@@ -7,43 +7,38 @@ interface AdminHeaderProps {
 
 export function AdminHeader({ title, subtitle }: AdminHeaderProps) {
   return (
-    <header className="bg-card border-b border-border px-6 py-4">
+    <header className="bg-[hsl(var(--card))] border-b border-[hsl(var(--border))] px-6 py-4">
       <div className="flex items-center justify-between">
-        {/* Title & Subtitle */}
         <div>
-          <h1 className="text-2xl font-bold text-primary-text font-heading">{title}</h1>
-          <p className="text-sm text-muted-foreground">{subtitle}</p>
+          <h1 className="font-bold text-2xl">{title}</h1>
+          <p className="text-[hsl(var(--muted-foreground))] text-sm">{subtitle}</p>
         </div>
-
-        {/* Actions */}
+        
         <div className="flex items-center gap-4">
-          {/* Search Input */}
           <div className="relative">
-            <input
-              type="text"
-              placeholder="Quick search..."
-              className="w-64 rounded-lg border border-border bg-background px-4 py-2 text-primary-text placeholder-muted-foreground focus:border-primary focus:outline-none"
+            <input 
+              type="text" 
+              placeholder="Quick search..." 
+              className="bg-[hsl(var(--background))] border border-[hsl(var(--border))] rounded-lg px-4 py-2 w-64 focus:border-[hsl(var(--primary))] focus:outline-none"
             />
-            <Search className="absolute right-3 top-3 h-4 w-4 text-muted-foreground pointer-events-none" />
+            <Search className="absolute right-3 top-3 h-4 w-4 text-[hsl(var(--muted-foreground))]" />
           </div>
-
-          {/* Notification Bell */}
-          <button className="relative rounded-lg p-2 hover:bg-accent transition-colors">
-            <Bell className="h-5 w-5 text-muted-foreground" />
-            <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-xs text-destructive-foreground">
+          
+          <button className="relative p-2 hover:bg-[var(--accent)] rounded-lg">
+            <Bell className="h-5 w-5 text-[hsl(var(--muted-foreground))]" />
+            <span className="absolute -top-1 -right-1 bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))] text-xs rounded-full h-5 w-5 flex items-center justify-center">
               3
             </span>
           </button>
-
-          {/* User Profile */}
-          <div className="flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-accent transition-colors">
-            <img
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
-              alt="Admin"
-              className="h-8 w-8 rounded-full object-cover"
+          
+          <div className="flex items-center gap-2 cursor-pointer hover:bg-[var(--accent)] rounded-lg p-2">
+            <img 
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
+              alt="Admin" 
+              className="w-8 h-8 rounded-full"
             />
-            <span className="font-medium text-primary-text">Admin</span>
-            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+            <span className="font-medium">Admin</span>
+            <ChevronDown className="h-4 w-4 text-[hsl(var(--muted-foreground))] " />
           </div>
         </div>
       </div>
