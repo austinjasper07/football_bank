@@ -3,7 +3,7 @@ import React from 'react'
 export default function Footer() {
   return (
     <footer className="bg-primary-card px-16 pt-16 pb-8 border-t border-divider">
-        <div className="container mx-auto px-4">
+        <div className="max-w-full mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div>
               <span className="font-poppins font-bold text-2xl text-accent-blue mb-4 inline-block cursor-pointer">

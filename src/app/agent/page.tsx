@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { FC } from 'react';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'About Our Agent | FootballBank.soccer',
@@ -155,12 +156,12 @@ const AboutPage: FC = () => {
               Whether you&apos;re a promising talent or an established player looking for new opportunities, we&apos;re here to guide your journey to success.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-accent-blue px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors">
+              <Link href={'/contact'} className="bg-white text-accent-blue px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors">
                 Schedule Consultation
-              </button>
-              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-accent-blue transition-colors">
+              </Link>
+              <Link href={'/submit-profile'} className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-accent-blue transition-colors">
                 Submit Your Profile
-              </button>
+              </Link>
             </div>
           </div>
         </div>
