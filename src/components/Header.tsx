@@ -36,7 +36,7 @@ export default function Header() {
               <FaFootball className="rounded-full" />
             </div>
             <div className="hidden md:block md:text-lg xl:text-2xl">
-              FootballBank<span className="text-accent-green">.soccer</span>
+              FootballBank<span className="text-accent-red">.soccer</span>
             </div>
           </Link>
 
@@ -48,8 +48,8 @@ export default function Header() {
                 href={path}
                 className={`transition-colors ${
                   pathname === path
-                    ? "text-accent-blue font-semibold"
-                    : "text-primary-text hover:text-accent-blue"
+                    ? "text-accent-red font-semibold"
+                    : "text-primary-text hover:text-accent-red"
                 }`}
               >
                 {label}
@@ -64,14 +64,14 @@ export default function Header() {
               <Link href="/shop/cart" className="relative">
                 <FaShoppingCart
                   className={`text-xl ${
-                    isCartPage ? "text-accent-blue" : "text-accent-blue hover:text-[var(--accent)]"
+                    isCartPage ? "text-accent-red" : "text-accent-red hover:text-[var(--accent)]"
                   }`}
                 />
               </Link>
             )}
             <Link
               href="/signup"
-              className="hidden lg:block bg-accent-blue hover:bg-opacity-90 text-white px-4 py-2 rounded-md font-medium text-nowrap"
+              className="hidden lg:block bg-accent-red hover:bg-opacity-90 text-white px-4 py-2 rounded-md font-medium text-nowrap"
             >
               Sign Up
             </Link>
@@ -97,8 +97,8 @@ export default function Header() {
               href={path}
               className={`text-base ${
                 pathname === path
-                  ? "text-accent-blue font-semibold"
-                  : "text-primary-text hover:text-accent-blue"
+                  ? "text-accent-red font-semibold"
+                  : "text-primary-text hover:text-accent-red"
               }`}
               onClick={() => setMenuOpen(false)}
             >
@@ -107,7 +107,7 @@ export default function Header() {
           ))}
           <Link
             href="/signup"
-            className="bg-accent-blue text-white text-center py-2 rounded-md"
+            className="bg-accent-red text-white text-center py-2 rounded-md"
             onClick={() => setMenuOpen(false)}
           >
             Sign Up

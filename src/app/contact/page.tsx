@@ -106,7 +106,7 @@ const ContactPage: FC = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-accent-blue hover:bg-accent-blue/90 text-white px-8 py-4 rounded-lg font-semibold"
+                className="w-full bg-accent-red hover:bg-accent-red/90 text-white px-8 py-4 rounded-lg font-semibold"
               >
                 Send Message
               </button>
@@ -119,14 +119,14 @@ const ContactPage: FC = () => {
             <div className="bg-primary-card rounded-xl p-6 border border-divider shadow-lg">
               <div className="w-full h-96 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
                 <div className="text-center">
-                  <i className="fa-solid fa-map text-accent-blue text-4xl mb-4" />
+                  <i className="fa-solid fa-map text-accent-red text-4xl mb-4" />
                   <p className="text-primary-muted">Interactive Map</p>
                   <p className="text-sm text-primary-muted">London Office Location</p>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <i className="fa-solid fa-building text-accent-blue mt-1" />
+                  <i className="fa-solid fa-building text-accent-red mt-1" />
                   <div>
                     <p className="font-medium">FootballBank.soccer</p>
                     <p className="text-primary-muted text-sm">25 Canary Wharf, London E14 5AB</p>

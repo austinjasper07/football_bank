@@ -10,7 +10,7 @@ const CartPage: FC = () => {
         <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="flex items-center space-x-2 text-sm">
-                    <span className="text-primary-muted hover:text-accent-blue cursor-pointer">Shop</span>
+                    <span className="text-primary-muted hover:text-accent-red cursor-pointer">Shop</span>
                     <i className="fa-solid fa-chevron-right text-primary-muted text-xs"></i>
                     <span className="text-primary-text">Shopping Cart</span>
                 </div>
@@ -43,11 +43,11 @@ const CartPage: FC = () => {
                                     <p className="text-primary-muted mb-2">Size: UK 8 | Color: Blue/White</p>
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center border border-divider rounded-lg">
-                                            <button className="px-3 py-1 text-primary-text hover:text-accent-blue">-</button>
+                                            <button className="px-3 py-1 text-primary-text hover:text-accent-red">-</button>
                                             <span className="px-3 py-1 border-l border-r border-divider">1</span>
-                                            <button className="px-3 py-1 text-primary-text hover:text-accent-blue">+</button>
+                                            <button className="px-3 py-1 text-primary-text hover:text-accent-red">+</button>
                                         </div>
-                                        <span className="font-bold text-xl text-accent-blue">£189.99</span>
+                                        <span className="font-bold text-xl text-accent-red">£189.99</span>
                                     </div>
                                 </div>
                             </div>
@@ -69,11 +69,11 @@ const CartPage: FC = () => {
                                     <p className="text-primary-muted mb-2">Size: Medium | Color: Black</p>
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center border border-divider rounded-lg">
-                                            <button className="px-3 py-1 text-primary-text hover:text-accent-blue">-</button>
+                                            <button className="px-3 py-1 text-primary-text hover:text-accent-red">-</button>
                                             <span className="px-3 py-1 border-l border-r border-divider">2</span>
-                                            <button className="px-3 py-1 text-primary-text hover:text-accent-blue">+</button>
+                                            <button className="px-3 py-1 text-primary-text hover:text-accent-red">+</button>
                                         </div>
-                                        <span className="font-bold text-xl text-accent-blue">£79.98</span>
+                                        <span className="font-bold text-xl text-accent-red">£79.98</span>
                                     </div>
                                 </div>
                             </div>
@@ -95,11 +95,11 @@ const CartPage: FC = () => {
                                     <p className="text-primary-muted mb-2">Size: 9 | Color: White/Green</p>
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center border border-divider rounded-lg">
-                                            <button className="px-3 py-1 text-primary-text hover:text-accent-blue">-</button>
+                                            <button className="px-3 py-1 text-primary-text hover:text-accent-red">-</button>
                                             <span className="px-3 py-1 border-l border-r border-divider">1</span>
-                                            <button className="px-3 py-1 text-primary-text hover:text-accent-blue">+</button>
+                                            <button className="px-3 py-1 text-primary-text hover:text-accent-red">+</button>
                                         </div>
-                                        <span className="font-bold text-xl text-accent-blue">£79.99</span>
+                                        <span className="font-bold text-xl text-accent-red">£79.99</span>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@ const CartPage: FC = () => {
 
                         {/* <!-- Continue Shopping --> */}
                         <div className="flex justify-between items-center pt-6 border-t border-divider">
-                            <button className="flex items-center gap-2 text-accent-blue hover:text-accent-amber transition-colors">
+                            <button className="flex items-center gap-2 text-accent-red hover:text-accent-amber transition-colors">
                                 <i className="fa-solid fa-arrow-left"></i>
                                 Continue Shopping
                             </button>
@@ -124,7 +124,7 @@ const CartPage: FC = () => {
                             <h3 className="font-poppins font-semibold text-lg mb-4 text-primary-text">Coupon Code</h3>
                             <div className="flex gap-2">
                                 <input type="text" placeholder="Enter coupon code" className="flex-1 bg-primary-bg border w-[60%] border-divider rounded-lg px-3 py-2 text-primary-text placeholder-primary-muted focus:border-accent-amber focus:outline-none" />
-                                <button className="bg-accent-blue hover:bg-opacity-80 text-white px-4 py-3 rounded-lg font-medium transition-colors w-[30%]">
+                                <button className="bg-accent-red hover:bg-opacity-80 text-white px-4 py-3 rounded-lg font-medium transition-colors w-[30%]">
                                     Apply
                                 </button>
                             </div>
@@ -135,7 +135,7 @@ const CartPage: FC = () => {
                             <h3 className="font-poppins font-semibold text-lg mb-4 text-primary-text">Shipping Options</h3>
                             <div className="space-y-3">
                                 <label className="flex items-center gap-3 cursor-pointer">
-                                    <input type="radio" name="shipping" className="text-accent-blue" checked />
+                                    <input type="radio" name="shipping" className="text-accent-red" checked />
                                     <div className="flex-1">
                                         <div className="flex justify-between">
                                             <span className="font-medium text-primary-text">Standard Delivery</span>
@@ -145,7 +145,7 @@ const CartPage: FC = () => {
                                     </div>
                                 </label>
                                 <label className="flex items-center gap-3 cursor-pointer">
-                                    <input type="radio" name="shipping" className="text-accent-blue" />
+                                    <input type="radio" name="shipping" className="text-accent-red" />
                                     <div className="flex-1">
                                         <div className="flex justify-between">
                                             <span className="font-medium text-primary-text">Express Delivery</span>
@@ -155,7 +155,7 @@ const CartPage: FC = () => {
                                     </div>
                                 </label>
                                 <label className="flex items-center gap-3 cursor-pointer">
-                                    <input type="radio" name="shipping" className="text-accent-blue" />
+                                    <input type="radio" name="shipping" className="text-accent-red" />
                                     <div className="flex-1">
                                         <div className="flex justify-between">
                                             <span className="font-medium text-primary-text">Next Day Delivery</span>
@@ -190,12 +190,12 @@ const CartPage: FC = () => {
                                 <div className="border-t border-divider pt-3">
                                     <div className="flex justify-between text-xl font-bold">
                                         <span className="text-primary-text">Total</span>
-                                        <span className="text-accent-blue">£349.96</span>
+                                        <span className="text-accent-red">£349.96</span>
                                     </div>
                                 </div>
                             </div>
                             
-                            <button className="w-full bg-accent-blue hover:bg-opacity-80 text-white py-4 rounded-lg font-semibold text-lg mt-6 transition-colors">
+                            <button className="w-full bg-accent-red hover:bg-opacity-80 text-white py-4 rounded-lg font-semibold text-lg mt-6 transition-colors">
                                 <i className="fa-solid fa-lock mr-2"></i>
                                 Proceed to Checkout
                             </button>
@@ -222,13 +222,13 @@ const CartPage: FC = () => {
                             <h3 className="font-poppins font-semibold text-lg mb-4 text-primary-text">We Accept</h3>
                             <div className="flex gap-3">
                                 <div className="bg-primary-bg border border-divider rounded p-2">
-                                    <i className="fa-brands fa-cc-visa text-2xl text-accent-blue"></i>
+                                    <i className="fa-brands fa-cc-visa text-2xl text-accent-red"></i>
                                 </div>
                                 <div className="bg-primary-bg border border-divider rounded p-2">
                                     <i className="fa-brands fa-cc-mastercard text-2xl text-accent-red"></i>
                                 </div>
                                 <div className="bg-primary-bg border border-divider rounded p-2">
-                                    <i className="fa-brands fa-cc-paypal text-2xl text-accent-blue"></i>
+                                    <i className="fa-brands fa-cc-paypal text-2xl text-accent-red"></i>
                                 </div>
                                 <div className="bg-primary-bg border border-divider rounded p-2">
                                     <i className="fa-brands fa-apple-pay text-2xl text-primary-text"></i>

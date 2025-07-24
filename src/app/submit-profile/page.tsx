@@ -114,7 +114,7 @@ export default function PlayerSubmissionForm() {
         <div className="flex items-center justify-center gap-4 mb-12">
           {[1, 2, 3].map((s, i) => (
             <div key={s} className="flex items-center gap-2">
-              <div className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium ${step >= s ? 'bg-accent-blue text-white' : 'bg-primary-secondary border border-divider text-primary-muted'}`}>
+              <div className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium ${step >= s ? 'bg-accent-red text-white' : 'bg-primary-secondary border border-divider text-primary-muted'}`}>
                 {s === 3 ? <i className="fa-solid fa-check text-xs"></i> : s}
               </div>
               <span className={`text-sm font-medium ${step >= s ? 'text-primary-text' : 'text-primary-muted'}`}>{['Personal Details', 'Uploads', 'Complete'][i]}</span>
@@ -161,7 +161,7 @@ export default function PlayerSubmissionForm() {
               ))}
             </div>
             <div className="flex justify-end mt-8">
-              <button onClick={nextStep} className="bg-accent-blue text-white px-8 py-3 rounded-md">Next Step</button>
+              <button onClick={nextStep} className="bg-accent-red text-white px-8 py-3 rounded-md">Next Step</button>
             </div>
           </div>
         )}
@@ -176,7 +176,7 @@ export default function PlayerSubmissionForm() {
                 <i className="fa-solid fa-image text-4xl text-primary-muted mb-4"></i>
                 <p className="text-primary-muted mb-2">{photo ? `Selected: ${photo.name}` : 'Drag and drop your photo here'}</p>
                 <p className="text-sm text-primary-muted mb-4">JPG, PNG up to 5MB</p>
-                <button onClick={() => triggerFileInput('photo')} className="bg-accent-blue text-white px-6 py-2 rounded-md">Choose File</button>
+                <button onClick={() => triggerFileInput('photo')} className="bg-accent-red text-white px-6 py-2 rounded-md">Choose File</button>
                 <input ref={photoInputRef} type="file" className="hidden" accept=".png,.jpg,.jpeg" onChange={(e) => handleFileUpload(e, 'photo')} />
               </div>
 
@@ -185,7 +185,7 @@ export default function PlayerSubmissionForm() {
                 <i className="fa-solid fa-file-pdf text-4xl text-primary-muted mb-4"></i>
                 <p className="text-primary-muted mb-2">{cv ? `Uploaded: ${cv.name}` : 'Upload your football CV'}</p>
                 <p className="text-sm text-primary-muted mb-4">PDF up to 10MB</p>
-                <button onClick={() => triggerFileInput('cv')} className="bg-accent-blue text-white px-6 py-2 rounded-md">Choose File</button>
+                <button onClick={() => triggerFileInput('cv')} className="bg-accent-red text-white px-6 py-2 rounded-md">Choose File</button>
                 <input ref={cvInputRef} type="file" className="hidden" accept=".pdf" onChange={(e) => handleFileUpload(e, 'cv')} />
               </div>
             </div>
@@ -226,7 +226,7 @@ export default function PlayerSubmissionForm() {
               </ul>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button onClick={reloadForm} className="bg-accent-blue text-white px-6 py-3 rounded-md">Submit Another Profile</button>
+              <button onClick={reloadForm} className="bg-accent-red text-white px-6 py-3 rounded-md">Submit Another Profile</button>
               <button className="border border-divider px-6 py-3 rounded-md text-primary-text">View Player Profiles</button>
             </div>
           </div>

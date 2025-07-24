@@ -10,7 +10,7 @@ export default function ProfileSubmission() {
       </Head>
 
       <main className="bg-primary-bg text-primary-text font-inter text-center py-16">
-        <h1 className="font-poppins font-bold text-5xl mb-6 bg-gradient-to-r from-accent-blue to-accent-green bg-clip-text text-transparent">
+        <h1 className="font-poppins font-bold text-5xl mb-6 bg-gradient-to-r from-accent-red to-accent-amber bg-clip-text text-transparent">
           Submit Your Profile to Be Discovered
         </h1>
         <p className="text-xl text-primary-muted mb-8">
@@ -51,7 +51,7 @@ export default function ProfileSubmission() {
                   "Enhanced profile features",
                 ],
                 exclusions: ["Detailed scout feedback"],
-                color: "accent-blue",
+                color: "accent-red",
                 btn: "Select Standard",
               },
               {
@@ -92,7 +92,7 @@ export default function ProfileSubmission() {
                 >
                   {highlight && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-accent-blue text-white px-6 py-2 rounded-full text-sm font-semibold">
+                      <span className="bg-accent-red text-white px-6 py-2 rounded-full text-sm font-semibold">
                         Most Popular
                       </span>
                     </div>
@@ -133,11 +133,11 @@ export default function ProfileSubmission() {
                   </ul>
                   <button
                     className={`w-full py-4 rounded-xl font-semibold transition-all duration-200 ${
-                      color === "accent-blue"
-                        ? "bg-accent-blue text-white hover:bg-accent-blue/80"
+                      color === "accent-red"
+                        ? "bg-accent-red text-white hover:bg-accent-red/80"
                         : color === "accent-amber"
                         ? "bg-accent-amber text-primary-bg hover:bg-accent-amber/80"
-                        : "bg-primary-bg text-primary-text border hover:bg-accent-blue hover:text-white"
+                        : "bg-primary-bg text-primary-text border hover:bg-accent-red hover:text-white"
                     }`}
                   >
                     {btn}
@@ -217,7 +217,7 @@ export default function ProfileSubmission() {
         {/* Final CTA Banner */}
         <section
           id="final-cta"
-          className="py-16 md:py-24 bg-gradient-to-r from-accent-blue to-accent-green"
+          className="py-16 md:py-24 bg-gradient-to-r from-accent-red to-accent-amber"
         >
           <div className="container mx-auto px-4 text-center">
             <h2 className="font-poppins font-bold text-4xl md:text-5xl mb-6 text-white">
@@ -227,7 +227,7 @@ export default function ProfileSubmission() {
               Join thousands of players who have taken the next step in their
               football career
             </p>
-            <button className="bg-white text-accent-blue hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 transform hover:scale-105 shadow-2xl">
+            <button className="bg-white text-accent-red hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 transform hover:scale-105 shadow-2xl">
               Start Your Submission
             </button>
           </div>

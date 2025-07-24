@@ -37,7 +37,7 @@ const OrderConfirmedPage: FC = () => {
 
                 <div className="mb-6 flex justify-between items-center">
                   <span className="text-primary-muted">Order Number:</span>
-                  <span className="font-mono font-medium text-accent-blue">#FB-2024-001247</span>
+                  <span className="font-mono font-medium text-accent-red">#FB-2024-001247</span>
                 </div>
 
                 <div className="mb-6">
@@ -112,7 +112,7 @@ const OrderConfirmedPage: FC = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-accent-blue hover:bg-opacity-80 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                <button className="bg-accent-red hover:bg-opacity-80 text-white px-8 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
                   <i className="fa-solid fa-shopping-bag"></i>
                   Continue Shopping
                 </button>
@@ -126,7 +126,7 @@ const OrderConfirmedPage: FC = () => {
                 <h3 className="font-poppins font-semibold text-lg mb-4">What&apos;s Next?</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                   <div className="flex items-center gap-3">
-                    <i className="fa-solid fa-envelope text-accent-blue"></i>
+                    <i className="fa-solid fa-envelope text-accent-red"></i>
                     <span>Confirmation email sent to your inbox</span>
                   </div>
                   <div className="flex items-center gap-3">

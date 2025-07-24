@@ -46,14 +46,14 @@ export default function HomePage() {
           className="relative h-[600px] flex items-center bg-gradient-to-br from-primary-bg via-gray-50 to-blue-50 overflow-hidden"
         >
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute w-64 h-64 rounded-full bg-accent-blue blur-3xl -top-20 -left-20"></div>
+            <div className="absolute w-64 h-64 rounded-full bg-accent-red blur-3xl -top-20 -left-20"></div>
             <div className="absolute w-64 h-64 rounded-full bg-accent-green blur-3xl bottom-20 right-20"></div>
           </div>
           <div className="container mx-auto px-4 z-10">
             <div className="max-w-3xl">
               <h1 className="font-poppins font-bold text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 text-primary-text">
                 Empowering Football{" "}
-                <span className="text-accent-green">Talent</span> Worldwide
+                <span className="text-accent-red">Talent</span> Worldwide
               </h1>
               <p className="text-primary-muted text-lg md:text-xl mb-8 font-inter">
                 Connecting exceptional players with opportunities. Showcase your
@@ -61,10 +61,10 @@ export default function HomePage() {
                 next level.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <span className="bg-accent-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium text-center transition-colors cursor-pointer">
+                <span className="bg-accent-red hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium text-center transition-colors cursor-pointer">
                   Submit Your Profile
                 </span>
-                <span className="border border-divider hover:border-accent-blue text-primary-text px-6 py-3 rounded-md font-medium text-center transition-colors cursor-pointer">
+                <span className="border border-divider hover:border-accent-red text-primary-text px-6 py-3 rounded-md font-medium text-center transition-colors cursor-pointer">
                   Browse Players
                 </span>
               </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
               <h2 className="font-poppins font-bold text-3xl md:text-4xl text-primary-text">
                 Featured Players
               </h2>
-              <span className="text-accent-blue hover:text-blue-600 flex items-center gap-2 transition-colors cursor-pointer">
+              <span className="text-accent-red hover:text-blue-600 flex items-center gap-2 transition-colors cursor-pointer">
                 View All <i className="fa-solid fa-arrow-right"></i>
               </span>
             </div>
@@ -169,7 +169,7 @@ export default function HomePage() {
                     Former U21 international with exceptional finishing skills
                     and pace.
                   </p>
-                  <span className="w-full block text-center bg-accent-blue hover:bg-blue-600 text-white py-2 rounded transition-colors cursor-pointer">
+                  <span className="w-full block text-center bg-accent-red hover:bg-blue-600 text-white py-2 rounded transition-colors cursor-pointer">
                     View Profile
                   </span>
                 </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
                     Creative playmaker with excellent vision and passing
                     accuracy.
                   </p>
-                  <span className="w-full block text-center bg-accent-blue hover:bg-blue-600 text-white py-2 rounded transition-colors cursor-pointer">
+                  <span className="w-full block text-center bg-accent-red hover:bg-blue-600 text-white py-2 rounded transition-colors cursor-pointer">
                     View Profile
                   </span>
                 </div>
@@ -259,7 +259,7 @@ export default function HomePage() {
                     Powerful center-back with leadership qualities and aerial
                     dominance.
                   </p>
-                  <span className="w-full block text-center bg-accent-blue hover:bg-blue-600 text-white py-2 rounded transition-colors cursor-pointer">
+                  <span className="w-full block text-center bg-accent-red hover:bg-blue-600 text-white py-2 rounded transition-colors cursor-pointer">
                     View Profile
                   </span>
                 </div>
@@ -304,7 +304,7 @@ export default function HomePage() {
                     Experienced shot-stopper with excellent reflexes and
                     distribution.
                   </p>
-                  <span className="w-full block text-center bg-accent-blue hover:bg-blue-600 text-white py-2 rounded transition-colors cursor-pointer">
+                  <span className="w-full block text-center bg-accent-red hover:bg-blue-600 text-white py-2 rounded transition-colors cursor-pointer">
                     View Profile
                   </span>
                 </div>
@@ -323,7 +323,7 @@ export default function HomePage() {
               <h2 className="font-poppins font-bold text-3xl md:text-4xl">
                 Live Scores
               </h2>
-              <span className="text-accent-blue hover:text-accent-amber flex items-center gap-2 transition-colors cursor-pointer">
+              <span className="text-accent-red hover:text-accent-amber flex items-center gap-2 transition-colors cursor-pointer">
                 View All <i className="fa-solid fa-arrow-right"></i>
               </span>
             </div>
@@ -530,7 +530,7 @@ export default function HomePage() {
                     {item.title}
                   </h3>
                   <div className="flex items-center justify-center">
-                    <i className="fa-solid fa-shopping-cart text-[#1F6FEB] mr-2" />
+                    <i className="fa-solid fa-shopping-cart text-accent-red mr-2" />
                     <span className="text-sm text-[#6B7280]">Shop Now</span>
                   </div>
                 </div>
@@ -546,7 +546,7 @@ export default function HomePage() {
               <h2 className="text-4xl font-poppins font-bold text-[#111827] mb-4">
                 From Our Blog
               </h2>
-              <div className="w-24 h-1 bg-[#1F6FEB] mx-auto" />
+              <div className="w-24 h-1 bg-accent-red mx-auto" />
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 mb-8">
@@ -595,7 +595,7 @@ export default function HomePage() {
                     <p className="text-[#6B7280] text-sm mb-4">
                       {post.summary}
                     </p>
-                    <button className="text-[#1F6FEB] font-medium hover:underline">
+                    <button className="text-accent-red font-medium hover:underline">
                       Read More
                     </button>
                   </div>
@@ -604,7 +604,7 @@ export default function HomePage() {
             </div>
 
             <div className="text-center">
-              <button className="bg-[#1F6FEB] text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+              <button className="bg-accent-red text-white px-8 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">
                 Visit Blog
               </button>
             </div>
@@ -614,9 +614,9 @@ export default function HomePage() {
         {/* PARTNER CTA */}
         <section
           id="partner-cta"
-          className="py-20 bg-[#1F6FEB] relative overflow-hidden"
+          className="py-20 mb-16 bg-accent-red relative overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1F6FEB] to-blue-600"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-accent-red to-accent-red/80"></div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-4xl font-poppins font-bold text-white mb-4">
               Club or Brand Looking to Collaborate?
@@ -624,7 +624,7 @@ export default function HomePage() {
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               We connect talent with trusted organizations.
             </p>
-            <button className="bg-white text-[#1F6FEB] px-8 py-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+            <button className="bg-white text-accent-red px-8 py-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
               Get in Touch
             </button>
           </div>

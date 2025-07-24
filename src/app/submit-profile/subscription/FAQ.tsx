@@ -53,7 +53,7 @@ const [openFAQ, setOpenFAQ] = useState<number | null>(null);
                     <i
                       className={`fa-solid fa-chevron-${
                         openFAQ === id ? "up" : "down"
-                      } text-accent-blue`}
+                      } text-accent-red`}
                     />
                   </div>
                   {openFAQ === id && (

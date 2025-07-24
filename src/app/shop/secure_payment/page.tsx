@@ -31,13 +31,13 @@ export default function Payment() {
                 <div className="mb-8">
                   <h3 className="font-medium text-lg mb-4 text-primary-text">Payment Method</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="border border-accent-blue bg-accent-blue/10 rounded-lg p-4 cursor-pointer">
+                    <div className="border border-accent-red bg-accent-red/10 rounded-lg p-4 cursor-pointer">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <FaCreditCard className="text-accent-blue text-xl" />
+                          <FaCreditCard className="text-accent-red text-xl" />
                           <span className="font-medium text-white">Credit/Debit Card</span>
                         </div>
-                        <FaCheckCircle className="text-accent-blue" />
+                        <FaCheckCircle className="text-accent-red" />
                       </div>
                     </div>
                     <div className="border border-divider rounded-lg p-4 cursor-pointer hover:border-accent-amber transition-colors">
@@ -62,7 +62,7 @@ export default function Payment() {
                         className="w-full bg-primary-secondary border border-divider rounded-lg px-4 py-3 text-primary-text placeholder-primary-muted focus:border-accent-amber focus:outline-none transition-colors"
                       />
                       <div className="absolute right-3 top-3 flex space-x-2">
-                        <FaCcVisa className="text-accent-blue text-xl" />
+                        <FaCcVisa className="text-accent-red text-xl" />
                         <FaCcMastercard className="text-accent-red text-xl" />
                       </div>
                     </div>
@@ -123,7 +123,7 @@ export default function Payment() {
                       type="checkbox"
                       checked={saveCard}
                       onChange={() => setSaveCard(!saveCard)}
-                      className="w-4 h-4 text-accent-blue bg-primary-secondary border border-divider rounded focus:ring-accent-blue focus:ring-2"
+                      className="w-4 h-4 text-accent-red bg-primary-secondary border border-divider rounded focus:ring-accent-red focus:ring-2"
                     />
                     <label htmlFor="save-card" className="text-sm text-primary-muted">
                       Save card for future payments
@@ -132,7 +132,7 @@ export default function Payment() {
 
                   <button
                     type="submit"
-                    className="w-full bg-accent-blue hover:bg-accent-blue/90 text-white px-8 py-4 rounded-lg font-semibold transition-colors"
+                    className="w-full bg-accent-red hover:bg-accent-red/90 text-white px-8 py-4 rounded-lg font-semibold transition-colors"
                   >
                     <FaLock className="inline-block mr-2" />
                     Complete Payment

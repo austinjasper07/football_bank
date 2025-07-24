@@ -17,9 +17,9 @@ export default function BlogArticle() {
         <section className="py-6 border-b border-divider">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto flex items-center space-x-2 text-sm">
-              <span className="text-primary-muted hover:text-accent-blue cursor-pointer">Home</span>
+              <span className="text-primary-muted hover:text-accent-red cursor-pointer">Home</span>
               <i className="fa-solid fa-chevron-right text-primary-muted text-xs" />
-              <span className="text-primary-muted hover:text-accent-blue cursor-pointer">Blog</span>
+              <span className="text-primary-muted hover:text-accent-red cursor-pointer">Blog</span>
               <i className="fa-solid fa-chevron-right text-primary-muted text-xs" />
               <span className="text-primary-text">Football Scouting</span>
             </div>
@@ -33,7 +33,7 @@ export default function BlogArticle() {
               {/* Article Header */}
               <header className="mb-12">
                 <div className="flex items-center gap-4 mb-6">
-                  <span className="bg-accent-blue text-white px-3 py-1 rounded-full text-sm font-medium">Scouting</span>
+                  <span className="bg-accent-red text-white px-3 py-1 rounded-full text-sm font-medium">Scouting</span>
                   <span className="text-primary-muted text-sm">8 min read</span>
                   <span className="text-primary-muted text-sm">Dec 15, 2024</span>
                 </div>
@@ -57,13 +57,13 @@ export default function BlogArticle() {
                     <div className="text-primary-muted text-sm">Senior Football Analyst</div>
                   </div>
                   <div className="flex items-center gap-4 ml-auto">
-                    <button className="text-primary-muted hover:text-accent-blue">
+                    <button className="text-primary-muted hover:text-accent-red">
                       <i className="fa-brands fa-twitter text-lg"></i>
                     </button>
-                    <button className="text-primary-muted hover:text-accent-blue">
+                    <button className="text-primary-muted hover:text-accent-red">
                       <i className="fa-brands fa-linkedin text-lg"></i>
                     </button>
-                    <button className="text-primary-muted hover:text-accent-blue">
+                    <button className="text-primary-muted hover:text-accent-red">
                       <i className="fa-solid fa-share text-lg"></i>
                     </button>
                   </div>
@@ -96,7 +96,7 @@ export default function BlogArticle() {
 
                 {/* Key Statistics */}
                 <section className="bg-primary-secondary rounded-xl p-8 border border-divider space-y-8">
-                  <h3 className="font-poppins font-semibold text-2xl text-accent-blue flex items-center">
+                  <h3 className="font-poppins font-semibold text-2xl text-accent-red flex items-center">
                     <i className="fa-solid fa-chart-line mr-3"></i>
                     Key Statistics
                   </h3>
@@ -129,8 +129,8 @@ export default function BlogArticle() {
                 </section>
 
                 {/* Expert Insight */}
-                <section className="bg-accent-blue/10 rounded-xl p-8 border border-accent-blue border-opacity-20">
-                  <h3 className="font-poppins font-semibold text-xl mb-4 text-accent-blue flex items-center">
+                <section className="bg-accent-red/10 rounded-xl p-8 border border-accent-red border-opacity-20">
+                  <h3 className="font-poppins font-semibold text-xl mb-4 text-accent-red flex items-center">
                     <i className="fa-solid fa-lightbulb mr-3"></i>
                     Expert Insight
                   </h3>
@@ -233,7 +233,7 @@ export default function BlogArticle() {
                     ].map((tag) => (
                       <span
                         key={tag}
-                        className="bg-primary-secondary text-accent-blue px-3 py-1 rounded-full text-sm hover:bg-accent-blue hover:text-white cursor-pointer transition-colors"
+                        className="bg-primary-secondary text-accent-red px-3 py-1 rounded-full text-sm hover:bg-accent-red hover:text-white cursor-pointer transition-colors"
                       >
                         {tag}
                       </span>
@@ -256,13 +256,13 @@ export default function BlogArticle() {
                         Marcus has worked with several Premier League clubs and contributes to football analytics publications.
                       </p>
                       <div className="flex gap-4">
-                        <button className="text-primary-muted hover:text-accent-blue transition-colors">
+                        <button className="text-primary-muted hover:text-accent-red transition-colors">
                           <i className="fa-brands fa-twitter text-lg"></i>
                         </button>
-                        <button className="text-primary-muted hover:text-accent-blue transition-colors">
+                        <button className="text-primary-muted hover:text-accent-red transition-colors">
                           <i className="fa-brands fa-linkedin text-lg"></i>
                         </button>
-                        <button className="text-primary-muted hover:text-accent-blue transition-colors">
+                        <button className="text-primary-muted hover:text-accent-red transition-colors">
                           <i className="fa-solid fa-envelope text-lg"></i>
                         </button>
                       </div>
@@ -298,7 +298,7 @@ export default function BlogArticle() {
                   ].map((article, i) => (
                     <article
                       key={i}
-                      className="bg-primary-secondary rounded-xl border border-divider overflow-hidden hover:border-accent-blue transition-colors cursor-pointer"
+                      className="bg-primary-secondary rounded-xl border border-divider overflow-hidden hover:border-accent-red transition-colors cursor-pointer"
                     >
                       <img className="w-full h-48 object-cover" src={article.image} alt={article.title} />
                       <div className="p-6">

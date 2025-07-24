@@ -12,8 +12,8 @@ export default function ForgotPassword({
   return (
     <>
       <div className="text-center mb-6">
-        <div className="bg-accent-blue/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-          <FaKey className="text-accent-blue text-2xl" />
+        <div className="bg-accent-red/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <FaKey className="text-accent-red text-2xl" />
         </div>
         <h1 className="font-poppins font-bold text-2xl mb-2">
           Reset Your Password
@@ -32,7 +32,7 @@ export default function ForgotPassword({
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-accent-blue text-white py-3 rounded-lg"
+          className="w-full bg-accent-red text-white py-3 rounded-lg"
         >
           {loading ? "Sending..." : "Send Reset Link"}
         </button>

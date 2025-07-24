@@ -30,11 +30,11 @@ const AboutPage: FC = () => {
                 alt="Marcus Rodriguez headshot"
                 width={192}
                 height={192}
-                className="rounded-full border-4 border-accent-blue object-cover"
+                className="rounded-full border-4 border-accent-red object-cover"
               />
               <div className="text-center md:text-left flex-1">
                 <h2 className="font-poppins font-bold text-3xl mb-4">Marcus Rodriguez</h2>
-                <p className="text-accent-blue font-semibold text-lg mb-4">FIFA Licensed Football Agent</p>
+                <p className="text-accent-red font-semibold text-lg mb-4">FIFA Licensed Football Agent</p>
                 <div className="bg-primary-bg rounded-lg p-4 mb-6 border border-divider flex justify-center md:justify-start items-center gap-3">
                   <i className="fa-solid fa-certificate text-accent-green" />
                   <span className="font-medium text-primary-text">FIFA License ID: #FR-2019-0847</span>
@@ -43,7 +43,7 @@ const AboutPage: FC = () => {
                   With over 15 years of experience in football representation, Marcus has successfully guided numerous players from youth academies to professional contracts across Europe&apos;s top leagues.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <span className="bg-accent-blue/-10 text-accent-blue px-3 py-1 rounded-full text-sm border border-accent-blue border/20">UEFA Licensed</span>
+                  <span className="bg-accent-red/-10 text-accent-red px-3 py-1 rounded-full text-sm border border-accent-red border/20">UEFA Licensed</span>
                   <span className="bg-accent-green/-10 text-accent-green px-3 py-1 rounded-full text-sm border border-accent-green border/20">150+ Players Represented</span>
                   <span className="bg-accent-amber/-10 text-accent-amber px-3 py-1 rounded-full text-sm border border-accent-amber border/20">25 Countries</span>
                 </div>
@@ -58,13 +58,13 @@ const AboutPage: FC = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="font-poppins font-bold text-3xl text-center mb-12">Career Timeline</h2>
           <div className="relative">
-            <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-accent-blue"></div>
+            <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-accent-red"></div>
             {[
               {
                 date: '2008 - 2012',
                 title: 'Junior Scout & Analyst',
                 desc: 'Started career with Manchester United Academy, identifying and evaluating youth talent across England and Ireland.',
-                dotColor: 'bg-accent-blue',
+                dotColor: 'bg-accent-red',
                 alignRight: false,
               },
               {
@@ -85,7 +85,7 @@ const AboutPage: FC = () => {
                 date: '2019 - Present',
                 title: 'FIFA Licensed Agent',
                 desc: 'Founded independent agency, representing players across Premier League, La Liga, Serie A, and emerging markets worldwide.',
-                dotColor: 'bg-accent-blue',
+                dotColor: 'bg-accent-red',
                 alignRight: true,
               },
             ].map(({ date, title, desc, dotColor, alignRight }, i) => (
@@ -116,7 +116,7 @@ const AboutPage: FC = () => {
               {
                 title: 'Integrity',
                 icon: 'fa-handshake',
-                color: 'blue',
+                color: 'red',
                 desc: 'We believe in transparent, honest dealings with all parties. Every negotiation is conducted with the highest ethical standards.',
               },
               {
@@ -150,16 +150,16 @@ const AboutPage: FC = () => {
       {/* CTA Section */}
       <section className="pb-16 md:pb-24">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-gradient-to-r from-accent-blue to-accent-green rounded-xl p-8 md:p-12 text-center shadow-lg">
+          <div className="bg-gradient-to-r from-accent-red to-accent-green rounded-xl p-8 md:p-12 text-center shadow-lg">
             <h2 className="font-poppins font-bold text-3xl md:text-4xl mb-6 text-white">Ready to Take the Next Step?</h2>
             <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
               Whether you&apos;re a promising talent or an established player looking for new opportunities, we&apos;re here to guide your journey to success.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={'/contact'} className="bg-white text-accent-blue px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors">
+              <Link href={'/contact'} className="bg-white text-accent-red px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors">
                 Schedule Consultation
               </Link>
-              <Link href={'/submit-profile'} className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-accent-blue transition-colors">
+              <Link href={'/submit-profile'} className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-accent-red transition-colors">
                 Submit Your Profile
               </Link>
             </div>

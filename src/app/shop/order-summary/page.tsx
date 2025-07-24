@@ -47,7 +47,7 @@ export default function OrderSummary() {
                         <label className="text-primary-muted text-sm font-medium block mb-1">
                           Order ID
                         </label>
-                        <span className="font-mono text-accent-blue font-semibold text-lg">
+                        <span className="font-mono text-accent-red font-semibold text-lg">
                           #FB-0251938
                         </span>
                       </div>
@@ -104,8 +104,8 @@ export default function OrderSummary() {
                   <div className="space-y-6">
                     {/* Item 1 */}
                     <div className="flex items-center gap-6 p-6 bg-primary-bg rounded-xl border border-divider">
-                      <div className="w-20 h-20 bg-accent-blue/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i className="fa-solid fa-crown text-accent-blue text-2xl"></i>
+                      <div className="w-20 h-20 bg-accent-red/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i className="fa-solid fa-crown text-accent-red text-2xl"></i>
                       </div>
                       <div className="flex-1">
                         <h3 className="font-poppins font-semibold text-lg mb-1">
@@ -220,7 +220,7 @@ export default function OrderSummary() {
                     <div className="bg-primary-bg rounded-lg p-4 mb-6 border border-divider">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <i className="fa-brands fa-cc-visa text-accent-blue text-xl"></i>
+                          <i className="fa-brands fa-cc-visa text-accent-red text-xl"></i>
                           <div>
                             <div className="font-medium">Visa</div>
                             <div className="text-primary-muted text-sm">
@@ -228,7 +228,7 @@ export default function OrderSummary() {
                             </div>
                           </div>
                         </div>
-                        <button className="text-accent-blue hover:text-accent-amber text-sm font-medium">
+                        <button className="text-accent-red hover:text-accent-amber text-sm font-medium">
                           Change
                         </button>
                       </div>
@@ -236,11 +236,11 @@ export default function OrderSummary() {
 
                     {/* CTA Buttons */}
                     <div className="space-y-4">
-                      <button className="w-full bg-accent-blue hover:bg-accent-blue/80 text-white py-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-3 transform hover:scale-105">
+                      <button className="w-full bg-accent-red hover:bg-accent-red/80 text-white py-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-3 transform hover:scale-105">
                         <i className="fa-solid fa-credit-card"></i>
                         Confirm &amp; Pay
                       </button>
-                      <button className="w-full bg-primary-bg hover:bg-primary-bg/80 text-primary-text border border-divider py-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-3 hover:border-accent-blue">
+                      <button className="w-full bg-primary-bg hover:bg-primary-bg/80 text-primary-text border border-divider py-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-3 hover:border-accent-red">
                         <i className="fa-solid fa-shopping-cart"></i>
                         Return to Cart
                       </button>
@@ -254,7 +254,7 @@ export default function OrderSummary() {
                           Need help with your order?
                         </span>
                       </div>
-                      <button className="text-accent-blue hover:text-accent-amber font-medium text-sm transition-colors">
+                      <button className="text-accent-red hover:text-accent-amber font-medium text-sm transition-colors">
                         Contact Support
                       </button>
                     </div>

@@ -33,7 +33,7 @@ const ProductDetailsPage: FC = () => {
                   {Array(4).fill(null).map((_, i) => (
                     <Image
                       key={i}
-                      className={`w-full h-20 object-cover rounded-lg bg-primary-card cursor-pointer border-2 ${i === 0 ? 'border-accent-blue' : 'border-divider hover:border-accent-blue transition-colors'}`}
+                      className={`w-full h-20 object-cover rounded-lg bg-primary-card cursor-pointer border-2 ${i === 0 ? 'border-accent-red' : 'border-divider hover:border-accent-red transition-colors'}`}
                       src="https://storage.googleapis.com/uxpilot-auth.appspot.com/ed3b50b5f5-5d0cdc4b04a8ae60f70c.png"
                       alt={`Boot view ${i + 1}`}
                       width={80}
@@ -58,7 +58,7 @@ const ProductDetailsPage: FC = () => {
                     <span className="text-accent-green font-medium">In Stock</span>
                   </div>
                   <div className="flex items-center gap-4 mb-6">
-                    <span className="text-accent-blue font-bold text-3xl">£189.99</span>
+                    <span className="text-accent-red font-bold text-3xl">£189.99</span>
                     <span className="text-primary-muted line-through text-xl">£249.99</span>
                     <span className="bg-accent-green text-white px-2 py-1 rounded text-sm font-medium">24% OFF</span>
                   </div>
@@ -74,32 +74,32 @@ const ProductDetailsPage: FC = () => {
                       {[6, 7, 8, 9, 10, 11, 12, 13].map((size) => (
                         <button
                           key={size}
-                          className={`border py-2 px-3 rounded-lg transition-colors ${size === 8 ? 'border-accent-blue bg-accent-blue text-white' : size === 13 ? 'border-divider bg-primary-card text-primary-muted cursor-not-allowed opacity-50' : 'border-divider bg-primary-card text-primary-text hover:border-accent-blue'}`}
+                          className={`border py-2 px-3 rounded-lg transition-colors ${size === 8 ? 'border-accent-red bg-accent-red text-white' : size === 13 ? 'border-divider bg-primary-card text-primary-muted cursor-not-allowed opacity-50' : 'border-divider bg-primary-card text-primary-text hover:border-accent-red'}`}
                         >
                           {size}
                         </button>
                       ))}
                     </div>
-                    <span className="text-accent-blue text-sm cursor-pointer hover:underline mt-2 inline-block">Size Guide</span>
+                    <span className="text-accent-red text-sm cursor-pointer hover:underline mt-2 inline-block">Size Guide</span>
                   </div>
 
                   {/* Quantity */}
                   <div className="mb-6">
                     <h3 className="font-poppins font-semibold text-lg mb-3 text-primary-text">Quantity</h3>
                     <div className="flex items-center border border-divider rounded-lg w-32 bg-primary-card">
-                      <button className="px-3 py-2 text-primary-text hover:text-accent-blue">-</button>
+                      <button className="px-3 py-2 text-primary-text hover:text-accent-red">-</button>
                       <span className="px-3 py-2 border-l border-r border-divider text-center flex-1">1</span>
-                      <button className="px-3 py-2 text-primary-text hover:text-accent-blue">+</button>
+                      <button className="px-3 py-2 text-primary-text hover:text-accent-red">+</button>
                     </div>
                   </div>
 
                   {/* Action Buttons */}
                   <div className="space-y-4 mb-6">
-                    <button className="w-full bg-accent-blue hover:bg-accent-blue/90 text-white py-4 rounded-lg font-semibold text-lg transition-colors">
+                    <button className="w-full bg-accent-red hover:bg-accent-red/90 text-white py-4 rounded-lg font-semibold text-lg transition-colors">
                       <i className="fa-solid fa-cart-shopping mr-2" />
                       Add to Cart
                     </button>
-                    <button className="w-full bg-primary-card border border-divider hover:border-accent-blue text-primary-text hover:text-accent-blue py-4 rounded-lg font-semibold transition-colors">
+                    <button className="w-full bg-primary-card border border-divider hover:border-accent-red text-primary-text hover:text-accent-red py-4 rounded-lg font-semibold transition-colors">
                       Buy Now
                     </button>
                   </div>

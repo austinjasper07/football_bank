@@ -6,13 +6,13 @@ export default function Footer() {
         <div className="max-w-full mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div>
-              <span className="font-poppins font-bold text-2xl text-accent-blue mb-4 inline-block cursor-pointer">
-                FootballBank<span className="text-accent-green">.soccer</span>
+              <span className="font-poppins font-bold text-2xl text-accent-red mb-4 inline-block cursor-pointer">
+                FootballBank<span className="text-accent-red">.soccer</span>
               </span>
               <p className="text-primary-muted mb-6">Empowering football talent worldwide through visibility and opportunity.</p>
               <div className="flex space-x-4">
                 {['twitter', 'instagram', 'facebook', 'youtube'].map((brand) => (
-                  <span key={brand} className="text-primary-muted hover:text-accent-blue transition-colors cursor-pointer">
+                  <span key={brand} className="text-primary-muted hover:text-accent-red transition-colors cursor-pointer">
                     <i className={`fa-brands fa-${brand} text-xl`} />
                   </span>
                 ))}
@@ -22,7 +22,7 @@ export default function Footer() {
               <h3 className="font-poppins font-semibold text-lg mb-4 text-primary-text">Quick Links</h3>
               <ul className="space-y-2">
                 {['Home', 'Players', 'Live Scores', 'Submit Profile', 'About Us'].map((link) => (
-                  <li key={link} className="text-primary-muted hover:text-accent-blue transition-colors cursor-pointer">{link}</li>
+                  <li key={link} className="text-primary-muted hover:text-accent-red transition-colors cursor-pointer">{link}</li>
                 ))}
               </ul>
             </div>
@@ -30,7 +30,7 @@ export default function Footer() {
               <h3 className="font-poppins font-semibold text-lg mb-4 text-primary-text">Resources</h3>
               <ul className="space-y-2">
                 {['Blog', 'Career Tips', 'Success Stories', 'Training Resources', 'FAQ'].map((link) => (
-                  <li key={link} className="text-primary-muted hover:text-accent-blue transition-colors cursor-pointer">{link}</li>
+                  <li key={link} className="text-primary-muted hover:text-accent-red transition-colors cursor-pointer">{link}</li>
                 ))}
               </ul>
             </div>
@@ -44,7 +44,7 @@ export default function Footer() {
                   'Privacy Policy',
                   'Terms of Service',
                 ].map((item) => (
-                  <li key={item} className="text-primary-muted hover:text-accent-blue transition-colors cursor-pointer">{item}</li>
+                  <li key={item} className="text-primary-muted hover:text-accent-red transition-colors cursor-pointer">{item}</li>
                 ))}
               </ul>
             </div>
@@ -53,7 +53,7 @@ export default function Footer() {
             <p className="text-primary-muted text-sm">© 2024 FootballBank.soccer. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0 text-sm">
               {['Privacy', 'Terms', 'Cookies'].map((item) => (
-                <span key={item} className="text-primary-muted hover:text-accent-blue transition-colors cursor-pointer">
+                <span key={item} className="text-primary-muted hover:text-accent-red transition-colors cursor-pointer">
                   {item}
                 </span>
               ))}

@@ -78,14 +78,14 @@ export default function SignUp({
         />
         <label className="flex gap-2 items-start text-sm">
           <input type="checkbox" required className="mt-1" />I agree to the{" "}
-          <span className="text-accent-blue cursor-pointer hover:text-accent-amber">
+          <span className="text-accent-red cursor-pointer hover:text-accent-amber">
             Terms & Privacy
           </span>
         </label>
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-accent-blue text-white py-3 rounded-lg"
+          className="w-full bg-accent-red text-white py-3 rounded-lg"
         >
           {loading ? "Creating Account..." : "Create Account"}
         </button>
@@ -94,7 +94,7 @@ export default function SignUp({
         <span className="text-primary-muted">Already have an account? </span>
         <button
           onClick={() => setView("login")}
-          className="text-accent-blue hover:text-accent-amber font-medium"
+          className="text-accent-red hover:text-accent-amber font-medium"
         >
           Sign in
         </button>

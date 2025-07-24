@@ -22,8 +22,8 @@ const BlogPage = () => {
                 key={cat}
                 className={`${
                   cat === 'All Posts'
-                    ? 'bg-accent-blue text-white'
-                    : 'bg-primary-white border border-divider text-primary-text hover:text-accent-blue hover:border-accent-blue'
+                    ? 'bg-accent-red text-white'
+                    : 'bg-primary-white border border-divider text-primary-text hover:text-accent-red hover:border-accent-red'
                 } px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors`}
               >
                 {cat}
@@ -50,7 +50,7 @@ const BlogPage = () => {
             </div>
             <div className="p-8 lg:p-12">
               <div className="flex items-center gap-4 mb-4">
-                <span className="text-accent-blue text-sm font-medium">Player Spotlight</span>
+                <span className="text-accent-red text-sm font-medium">Player Spotlight</span>
                 <span className="text-primary-muted text-sm">Dec 15, 2024</span>
               </div>
               <h2 className="font-poppins font-bold text-2xl lg:text-3xl mb-4">Rising Star: Marcus Silva&apos;s Journey</h2>
@@ -58,7 +58,7 @@ const BlogPage = () => {
                 At just 19, Marcus Silva has caught the attention of top European clubs. His journey from São Paulo&apos;s youth academy to professional football is inspiring.
               </p>
               <div className="flex items-center justify-between">
-                <button className="bg-accent-blue hover:bg-accent-blue/90 text-white px-6 py-3 rounded-lg font-medium">Read Full Story</button>
+                <button className="bg-accent-red hover:bg-accent-red/90 text-white px-6 py-3 rounded-lg font-medium">Read Full Story</button>
                 <div className="flex items-center gap-3">
                   <i className="fa-solid fa-eye text-primary-muted" />
                   <span className="text-primary-muted text-sm">2.4k views</span>
@@ -76,7 +76,7 @@ const BlogPage = () => {
             {blogPosts.map((post) => (
               <article
                 key={post.id}
-                className="bg-primary-white rounded-xl border border-divider shadow-sm hover:shadow-lg hover:border-accent-blue transition-all"
+                className="bg-primary-white rounded-xl border border-divider shadow-sm hover:shadow-lg hover:border-accent-red transition-all"
               >
                 <div className="relative h-48">
                   <Image src={post.image} alt={post.title} layout="fill" objectFit="cover" />
@@ -95,7 +95,7 @@ const BlogPage = () => {
                   <h3 className="font-poppins font-semibold text-lg mb-3 text-primary-text">{post.title}</h3>
                   <p className="text-primary-muted text-sm mb-4">{post.summary}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-accent-blue text-sm font-medium cursor-pointer hover:underline">Read More</span>
+                    <span className="text-accent-red text-sm font-medium cursor-pointer hover:underline">Read More</span>
                     <div className="flex items-center gap-2">
                       <i className="fa-solid fa-heart text-primary-muted text-sm" />
                       <span className="text-primary-muted text-sm">{post.likes}</span>
@@ -106,7 +106,7 @@ const BlogPage = () => {
             ))}
           </div>
           <div className="text-center mt-12">
-            <button className="bg-primary-white hover:bg-accent-blue border border-divider hover:border-accent-blue text-primary-text hover:text-white px-8 py-3 rounded-lg font-medium transition-colors">
+            <button className="bg-primary-white hover:bg-accent-red border border-divider hover:border-accent-red text-primary-text hover:text-white px-8 py-3 rounded-lg font-medium transition-colors">
               Load More Articles
             </button>
           </div>
@@ -127,7 +127,7 @@ const BlogPage = () => {
                 placeholder="Enter your email"
                 className="flex-1 bg-primary-white border border-divider rounded-lg px-4 py-3 text-primary-text placeholder-primary-muted focus:border-accent-amber focus:outline-none"
               />
-              <button className="bg-accent-blue hover:bg-accent-blue/90 text-white px-6 py-3 rounded-lg font-medium">
+              <button className="bg-accent-red hover:bg-accent-red/90 text-white px-6 py-3 rounded-lg font-medium">
                 Subscribe
               </button>
             </div>
@@ -171,7 +171,7 @@ const blogPosts = [
     image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/b0f174bb7d-aa0152ff27894568dd6f.png',
     summary: 'Technology and analytics are revolutionizing how clubs discover and evaluate talent.',
     category: 'Industry Insights',
-    badgeColor: 'accent-blue',
+    badgeColor: 'accent-red',
     badgeTextColor: 'text-white',
     likes: 189,
   },
@@ -207,7 +207,7 @@ const blogPosts = [
     image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/b1ea53e2c0-dc774abdd5e6661c1797.png',
     summary: 'Psychological development is crucial for youth players to achieve long-term success.',
     category: 'Youth Focus',
-    badgeColor: 'accent-blue',
+    badgeColor: 'accent-red',
     badgeTextColor: 'text-white',
     likes: 267,
   },
