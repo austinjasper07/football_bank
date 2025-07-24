@@ -1,6 +1,7 @@
 // components/ClientLayoutWrapper.tsx
 "use client";
-
+import { useAuth } from '@/hooks/useAuth';
+import SplashScreen from './SplashScreen';
 import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,7 +9,11 @@ import Footer from "@/components/Footer";
 export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith("/admin");
+  const { loading } = useAuth();
 
+  if (loading) {
+    return <SplashScreen />;
+  }
   return (
     <>
       {

@@ -4,6 +4,8 @@ import { Inter, Poppins } from "next/font/google";
 import type { Metadata } from "next";
 import Script from "next/script";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
+import { AuthProvider } from "@/context/AuthContext";
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,7 +46,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans bg-primary-bg text-primary-text">
-        <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        <AuthProvider>
+          <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        </AuthProvider>
+        
       </body>
     </html>
   );

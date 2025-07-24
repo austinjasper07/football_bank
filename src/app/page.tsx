@@ -614,9 +614,9 @@ export default function HomePage() {
         {/* PARTNER CTA */}
         <section
           id="partner-cta"
-          className="py-20 mb-16 bg-accent-red relative overflow-hidden"
+          className="py-20 mb-16 bg-accent-red/50 relative overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-accent-red to-accent-red/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-accent-red/80 to-accent-red/40"></div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-4xl font-poppins font-bold text-white mb-4">
               Club or Brand Looking to Collaborate?
