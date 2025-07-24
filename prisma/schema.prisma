@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  user
+  player
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum SubscriptionType {
+  live_streaming
+  player_publication
+}
+
+model User {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  email      String   @unique
+  firstName  String
+  lastName   String
+  password   String
+  role       Role
+  subscribed Boolean
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  playerRequests PlayerRequest[] 
+  subscriptions  Subscription[] 
+}
+
+model PlayerRequest {
+  id        String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String        @db.ObjectId  
+  user      User          @relation(fields: [userId], references: [id])
+  status    RequestStatus @default(PENDING)
+  formData  Json
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+
+model Subscription {
+  id        String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String          @db.ObjectId
+  user      User             @relation(fields: [userId], references: [id])
+  type      SubscriptionType
+  isActive  Boolean          @default(true)
+  startedAt DateTime         @default(now())
+  expiresAt DateTime
+}
+
+model Player {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName    String
+  lastName     String
+  dob          String
+  country      String
+  countryCode  String
+  position     String
+  height       String
+  weight       String
+  foot         String
+  email        String
+  phone        String
+  image        String
+  description  String
+  videoPrimary String[]
+  featured     Boolean
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  price       Float
+  image       String[]
+  featured    Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   String
+  imageUrl  String[]
+  featured  Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
