@@ -1,10 +1,12 @@
-"use client"
+'use client'
 
 import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { FaShoppingCart, FaBars, FaTimes } from "react-icons/fa"
 import { FaFootball } from "react-icons/fa6"
+import { useCart } from "@/context/CartContext" // ✅ import the cart context
+import Image from "next/image"
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -14,12 +16,13 @@ const navLinks = [
   { label: "Agent", path: "/agent" },
   { label: "Contact", path: "/contact" },
   { label: "Blog", path: "/blog" },
-  { label: "Shop", path: "/shop" },
+  { label: "Shop", path: "/shop/products" },
 ]
 
 export default function Header() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  const { cart } = useCart() // ✅ use cart from context
 
   const isShopOrCart = pathname.startsWith("/shop") || pathname === "/cart" || pathname === "/shop/cart"
   const isCartPage = pathname === "/cart" || pathname === "/shop/cart"
@@ -29,19 +32,17 @@ export default function Header() {
   return (
     <header className="bg-primary-card sticky top-0 z-50 border-b border-divider shadow-sm">
       <div className="max-w-full mx-auto px-4 lg:px-12">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className=" flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="font-poppins font-bold text-2xl text-accent-blue cursor-pointer flex items-center gap-2">
-            <div className="block  md:hidden">
-              <FaFootball className="rounded-full" />
-            </div>
-            <div className="hidden md:block md:text-lg xl:text-2xl">
-              FootballBank<span className="text-accent-red">.soccer</span>
-            </div>
+          <div className="relative w-30 h-28">
+            <Image src="/logo.png" alt="FootballBank Logo"  fill className="object-contain" />
+          </div>
+            
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-6  text-nowrap">
+          <nav className="hidden lg:flex space-x-6 text-nowrap">
             {navLinks.map(({ label, path }) => (
               <Link
                 key={path}
@@ -59,7 +60,7 @@ export default function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center space-x-4">
-            {/* Always visible cart icon if on shop/cart pages */}
+            {/* Cart Icon */}
             {isShopOrCart && (
               <Link href="/shop/cart" className="relative">
                 <FaShoppingCart
@@ -67,6 +68,11 @@ export default function Header() {
                     isCartPage ? "text-accent-red" : "text-accent-red hover:text-[var(--accent)]"
                   }`}
                 />
+                {cart.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-accent-red text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                    {cart.length}
+                  </span>
+                )}
               </Link>
             )}
             <Link
@@ -82,13 +88,11 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu Slide-in */}
+      {/* Mobile Menu */}
       <div
-        className={`
-          fixed top-0 right-0 h-full w-64 bg-primary-card z-50 shadow-lg
-          transform transition-transform duration-300 ease-in-out
-          ${menuOpen ? "translate-x-0" : "translate-x-full"}
-        `}
+        className={`fixed top-0 right-0 h-full w-64 bg-primary-card z-50 shadow-lg transform transition-transform duration-300 ease-in-out ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
       >
         <div className="flex flex-col p-6 space-y-4 pt-24">
           {navLinks.map(({ label, path }) => (
@@ -96,9 +100,7 @@ export default function Header() {
               key={path}
               href={path}
               className={`text-base ${
-                pathname === path
-                  ? "text-accent-red font-semibold"
-                  : "text-primary-text hover:text-accent-red"
+                pathname === path ? "text-accent-red font-semibold" : "text-primary-text hover:text-accent-red"
               }`}
               onClick={() => setMenuOpen(false)}
             >
@@ -115,13 +117,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Optional backdrop */}
-      {menuOpen && (
-        <div
-          className="fixed inset-0 bg-black/20 z-40"
-          onClick={() => setMenuOpen(false)}
-        />
-      )}
+      {/* Backdrop */}
+      {menuOpen && <div className="fixed inset-0 bg-black/20 z-40" onClick={() => setMenuOpen(false)} />}
     </header>
   )
 }

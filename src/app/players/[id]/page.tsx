@@ -8,12 +8,13 @@ import Head from 'next/head'
 
 export default async function PlayerPage({ params }: { params: { id: string } }) {
 
-  let player: Player
+  let player: Player;
 
   try {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/players/${params.id}`)
     if (!res.data) return notFound()
     player = res.data
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 } catch (err) {
   return notFound()
 }

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
 import { AuthProvider } from "@/context/AuthContext";
-
+import { CartProvider } from "@/context/CartContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,6 +33,24 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest"></link>
         <script
           dangerouslySetInnerHTML={{
             __html: `window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };`,
@@ -47,9 +65,10 @@ export default function RootLayout({
       </head>
       <body className="font-sans bg-primary-bg text-primary-text">
         <AuthProvider>
-          <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+          <CartProvider>
+            <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+          </CartProvider>
         </AuthProvider>
-        
       </body>
     </html>
   );

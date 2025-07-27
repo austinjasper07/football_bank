@@ -10,6 +10,7 @@ import {
   Settings 
 } from "lucide-react";
 import { AdminView } from "@/app/admin/page";
+import Image from "next/image";
 
 interface AdminSidebarProps {
   activeView: AdminView;
@@ -33,11 +34,9 @@ export function AdminSidebar({ activeView, onViewChange }: AdminSidebarProps) {
   return (
     <aside className="w-64 bg-[hsl(var(--card))] border-r border-[hsl(var(--border))] flex flex-col">
       {/* Logo */}
-      <div className="p-6 border-b border-[hsl(var(--border))]">
-        <span className="font-bold text-xl text-[hsl(var(--primary))]">
-          FootballBank<span className="text-green-500">.soccer</span>
-        </span>
-        <p className="text-muted-foreground text-sm mt-1">Admin Console</p>
+      <div className="p-4 border-b border-[hsl(var(--border))] flex items-center">
+        <Image src="/logo.png" alt="Logo" width={64} height={64} />
+        <p className="text-muted-foreground text-base font-semibold mt-1">Admin Console</p>
       </div>
       
       {/* Navigation */}

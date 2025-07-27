@@ -17,7 +17,7 @@ export function SportsHeader() {
   return (
     <div className="bg-card border-b">
       <div className="flex items-center gap-1 px-2 sm:px-4 py-2 overflow-x-auto">
-        <Button className="text-muted-foreground hover:text-foreground whitespace-nowrap">
+        <Button className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] whitespace-nowrap">
           <Star className="w-4 h-4 mr-1 sm:mr-2" />
           <span className="hidden sm:inline">FAVORITES</span>
           <span className="sm:hidden">FAV</span>
@@ -27,7 +27,7 @@ export function SportsHeader() {
         {sports.map((sport) => (
           <Button
             key={sport.name}
-            className={`whitespace-nowrap ${sport.active ? "bg-sport-football text-white hover:bg-sport-football/90" : "hover:text-foreground"}`}
+            className={`whitespace-nowrap ${sport.active ? "bg-[hsl(var(--sport-football))] text-white hover:bg-[hsl(var(--sport-football))]/90" : "hover:text-[hsl(var(--foreground))]"}`}
           >
             <sport.icon className="w-4 h-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">{sport.name}</span>
@@ -35,7 +35,7 @@ export function SportsHeader() {
           </Button>
         ))}
         
-        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground whitespace-nowrap">
+        <Button variant="ghost" size="sm" className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] whitespace-nowrap">
           MORE
           <ChevronDown className="w-4 h-4 ml-1" />
         </Button>

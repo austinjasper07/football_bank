@@ -18,7 +18,7 @@ export function PinnedLeagues() {
   return (
     <div className="w-64 bg-card border-r h-full">
       <div className="p-4 border-b">
-        <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+        <div className="flex items-center gap-2 text-sm font-medium text-[hsl(var(--foreground))]">
           <Pin className="w-4 h-4" />
           PINNED LEAGUES
         </div>

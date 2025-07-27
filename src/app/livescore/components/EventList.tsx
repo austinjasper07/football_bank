@@ -63,8 +63,8 @@ export function EventList() {
         <Card key={event.id} className="p-3 sm:p-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-2 sm:gap-0">
             <div className="flex items-center gap-2 min-w-0">
-              <Star className={`w-4 h-4 flex-shrink-0 ${event.pinned ? 'text-yellow-500 fill-yellow-500' : 'text-muted-foreground'}`} />
-              <span className="text-xs sm:text-sm font-medium text-muted-foreground truncate">
+              <Star className={`w-4 h-4 flex-shrink-0 ${event.pinned ? 'text-yellow-500 fill-yellow-500' : 'text-[hsl(var(--muted-foreground))]'}`} />
+              <span className="text-xs sm:text-sm font-medium text-[hsl(var(--muted-foreground))] truncate">
                 {event.flag} {event.tournament}
               </span>
               {event.pinned && <Star className="w-4 h-4 text-blue-500 fill-blue-500 flex-shrink-0" />}
@@ -72,14 +72,14 @@ export function EventList() {
             
             <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               {event.standings && (
-                <Button className="text-muted-foreground whitespace-nowrap btn-ghost">
+                <Button className="text-[hsl(var(--muted-foreground))] whitespace-nowrap btn-[hsl(var(--ghost))]">
                   <span className="hidden sm:inline">Standings</span>
                   <span className="sm:hidden">Stand</span>
                   <ChevronUp className="w-4 h-4 ml-1" />
                 </Button>
               )}
               {event.draw && (
-                <Button className="text-muted-foreground whitespace-nowrap btn-ghost">
+                <Button className="text-[hsl(var(--muted-foreground))] whitespace-nowrap btn-[hsl(var(--ghost))]">
                   Draw
                   <ChevronUp className="w-4 h-4 ml-1" />
                 </Button>
@@ -91,19 +91,19 @@ export function EventList() {
             {event.matches.map((match, index) => (
               <div key={index} className="flex flex-col sm:flex-row sm:items-center justify-between py-2 gap-2 sm:gap-0">
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <Star className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                  <Star className="w-4 h-4 text-[hsl(var(--muted-foreground))] flex-shrink-0" />
                   <span className="text-sm font-medium w-10 sm:w-12 flex-shrink-0">{match.time}</span>
                   
                   <div className="flex flex-col gap-1 min-w-0">
                     <div className="flex items-center gap-2 text-sm">
                       <span className="flex-shrink-0">{match.team1Flag}</span>
                       <span className="truncate">{match.team1}</span>
-                      <span className="text-muted-foreground">-</span>
+                      <span className="text-[hsl(var(--muted-foreground))]">-</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <span className="flex-shrink-0">{match.team2Flag}</span>
                       <span className="truncate">{match.team2}</span>
-                      <span className="text-muted-foreground">-</span>
+                      <span className="text-[hsl(var(--muted-foreground))]">-</span>
                     </div>
                   </div>
                 </div>
@@ -114,11 +114,11 @@ export function EventList() {
                       PREVIEW
                     </Button>
                   )}
-                  <Button className="btn-ghost px-2 py-1">
+                  <Button className="btn-[hsl(var(--ghost))] px-2 py-1">
                     <BarChart3 className="w-4 h-4" />
                   </Button>
                   {match.analysis && (
-                    <Button className="btn-ghost px-2 py-1">
+                    <Button className="btn-[hsl(var(--ghost))] px-2 py-1">
                       <MessageSquare className="w-4 h-4" />
                     </Button>
                   )}

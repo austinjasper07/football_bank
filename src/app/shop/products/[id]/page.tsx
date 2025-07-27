@@ -1,132 +1,226 @@
-import Image from 'next/image';
-import { FC } from 'react';
+'use client'
 
-const ProductDetailsPage: FC = () => {
+import { useEffect, useState } from 'react'
+import { useParams, useRouter } from 'next/navigation'
+import Image from 'next/image'
+import axios from 'axios'
+import { useCart } from '@/context/CartContext'
+import { Product } from '@/lib/types'
+
+export default function ProductDetailsClient() {
+  const { id } = useParams<{ id: string }>()
+  const router = useRouter()
+  const { addToCart } = useCart()
+
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  const [selectedSize, setSelectedSize] = useState<string | null>(null)
+  const [selectedColor, setSelectedColor] = useState<string | null>(null)
+  const [quantity, setQuantity] = useState(1)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`)
+        setProduct(res.data)
+      } catch {
+        // router.replace('/404')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (id) fetchProduct()
+  }, [id, router])
+
+  if (loading) return <div className="text-center py-24">Loading product...</div>
+  if (!product) return <div className="text-center py-24 text-accent-red">Product not found.</div>
+
+  const finalPrice = product.discount
+    ? (product.price - product.price * (product.discount / 100)).toFixed(2)
+    : product.price.toFixed(2)
+
+  const handleAddToCart = () => {
+    if (product.sizes && !selectedSize) {
+      alert('Please select a size')
+      return
+    }
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: Number(finalPrice),
+      image: product.image[0],
+      quantity,
+      size: selectedSize ?? undefined,
+      color: selectedColor ?? undefined,
+    })
+
+    alert('Product added to cart!')
+  }
+
+  const handleBuyNow = () => {
+    handleAddToCart()
+    router.push('/checkout')
+  }
+
   return (
     <main className="bg-primary-bg font-inter text-primary-text">
-      {/* Product Details */}
-      <section id="product-details" className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Product Images */}
-              <div id="product-images" className="space-y-4">
-                <div className="relative">
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4 max-w-6xl grid lg:grid-cols-2 gap-12">
+          {/* Images */}
+          <div className="space-y-4">
+            <Image
+              src={product.image[0]}
+              alt={product.name}
+              width={600}
+              height={600}
+              className="w-full h-auto object-cover rounded-xl bg-primary-card border border-divider"
+            />
+            {product.image.length > 1 && (
+              <div className="grid grid-cols-4 gap-4">
+                {product.image.map((img, i) => (
                   <Image
-                    id="main-image"
-                    className="w-full h-96 md:h-[500px] object-cover rounded-xl bg-primary-card border border-divider"
-                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/ed3b50b5f5-5d0cdc4b04a8ae60f70c.png"
-                    alt="Nike Mercurial Vapor 15 football boots"
-                    width={500}
-                    height={500}
+                    key={i}
+                    src={img}
+                    alt={`Thumbnail ${i + 1}`}
+                    width={100}
+                    height={100}
+                    className="w-full h-20 object-cover rounded-lg bg-primary-card border hover:border-accent-red"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-accent-green text-white px-3 py-1 rounded-full text-sm font-medium">Best Seller</span>
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-primary-card/90 text-primary-text p-3 rounded-full cursor-pointer hover:text-accent-red transition-colors border border-divider">
-                      <i className="fa-solid fa-heart text-lg" />
-                    </span>
-                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Product Info */}
+          <div className="space-y-6">
+            <h1 className="font-poppins font-bold text-3xl md:text-4xl">{product.name}</h1>
+
+            <div className="flex items-center gap-4">
+              <span className="text-accent-red font-bold text-3xl">£{finalPrice}</span>
+              {product.discount && (
+                <>
+                  <span className="line-through text-primary-muted text-xl">£{product.price}</span>
+                  <span className="bg-accent-green text-white px-2 py-1 rounded text-sm">
+                    {product.discount}% OFF
+                  </span>
+                </>
+              )}
+            </div>
+
+            <p className="text-primary-muted text-sm">{product.description}</p>
+
+            {/* Size Picker */}
+            {product.sizes?.length > 0 && (
+              <div>
+                <h4 className="font-semibold mb-2">Size</h4>
+                <div className="grid grid-cols-4 gap-2">
+                  {product.sizes.map(size => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`border px-3 py-2 rounded-lg ${
+                        selectedSize === size
+                          ? 'border-accent-red bg-accent-red text-white'
+                          : 'border-divider bg-primary-card hover:border-accent-red'
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
                 </div>
-                <div className="grid grid-cols-4 gap-4">
-                  {Array(4).fill(null).map((_, i) => (
-                    <Image
-                      key={i}
-                      className={`w-full h-20 object-cover rounded-lg bg-primary-card cursor-pointer border-2 ${i === 0 ? 'border-accent-red' : 'border-divider hover:border-accent-red transition-colors'}`}
-                      src="https://storage.googleapis.com/uxpilot-auth.appspot.com/ed3b50b5f5-5d0cdc4b04a8ae60f70c.png"
-                      alt={`Boot view ${i + 1}`}
-                      width={80}
-                      height={80}
+              </div>
+            )}
+
+            {/* Color Picker */}
+            {product.colors?.length > 0 && (
+              <div>
+                <h4 className="font-semibold mb-2">Color</h4>
+                <div className="flex gap-3">
+                  {product.colors.map(color => (
+                    <button
+                      key={color}
+                      onClick={() => setSelectedColor(color)}
+                      className={`w-8 h-8 rounded-full border-2 ${
+                        selectedColor === color ? 'border-accent-red' : 'border-divider'
+                      }`}
+                      style={{ backgroundColor: color.toLowerCase() }}
+                      title={color}
                     />
                   ))}
                 </div>
               </div>
+            )}
 
-              {/* Product Info */}
-              <div id="product-info" className="space-y-6">
-                <div>
-                  <h1 className="font-poppins font-bold text-3xl md:text-4xl mb-4 text-primary-text">Nike Mercurial Vapor 15</h1>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="flex items-center gap-1">
-                      {Array(5).fill(null).map((_, i) => (
-                        <i key={i} className="fa-solid fa-star text-accent-amber" />
-                      ))}
-                      <span className="text-primary-muted ml-2">4.8 (124 reviews)</span>
-                    </div>
-                    <span className="text-primary-muted">|</span>
-                    <span className="text-accent-green font-medium">In Stock</span>
-                  </div>
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-accent-red font-bold text-3xl">£189.99</span>
-                    <span className="text-primary-muted line-through text-xl">£249.99</span>
-                    <span className="bg-accent-green text-white px-2 py-1 rounded text-sm font-medium">24% OFF</span>
-                  </div>
-                </div>
+            {/* Quantity */}
+            <div>
+              <h4 className="font-semibold mb-2">Quantity</h4>
+              <div className="flex items-center border border-divider rounded-lg w-32 bg-primary-card">
+                <button
+                  className="px-3 py-2 text-primary-text hover:text-accent-red"
+                  onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                >
+                  -
+                </button>
+                <span className="px-4 py-2 border-l border-r border-divider">{quantity}</span>
+                <button
+                  className="px-3 py-2 text-primary-text hover:text-accent-red"
+                  onClick={() => setQuantity((prev) => prev + 1)}
+                >
+                  +
+                </button>
+              </div>
+            </div>
 
-                <div className="border-t border-divider pt-6">
-                  <p className="text-primary-muted mb-6">Professional football boots with advanced traction technology. Engineered for speed and precision on firm ground surfaces. Features Nike&apos;s latest innovation in boot design.</p>
+            {/* Stock */}
+            <div className="text-sm">
+              {product.stock > 0 ? (
+                <span className="text-accent-green">In Stock ({product.stock} items)</span>
+              ) : (
+                <span className="text-accent-red">Out of Stock</span>
+              )}
+            </div>
 
-                  {/* Size Selection */}
-                  <div className="mb-6">
-                    <h3 className="font-poppins font-semibold text-lg mb-3 text-primary-text">Size (UK)</h3>
-                    <div className="grid grid-cols-4 gap-3">
-                      {[6, 7, 8, 9, 10, 11, 12, 13].map((size) => (
-                        <button
-                          key={size}
-                          className={`border py-2 px-3 rounded-lg transition-colors ${size === 8 ? 'border-accent-red bg-accent-red text-white' : size === 13 ? 'border-divider bg-primary-card text-primary-muted cursor-not-allowed opacity-50' : 'border-divider bg-primary-card text-primary-text hover:border-accent-red'}`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                    <span className="text-accent-red text-sm cursor-pointer hover:underline mt-2 inline-block">Size Guide</span>
-                  </div>
+            {/* CTA Buttons */}
+            <div className="space-y-4">
+              <button
+                disabled={product.stock === 0}
+                onClick={handleAddToCart}
+                className="w-full bg-accent-red hover:bg-accent-red/90 text-white py-4 rounded-lg font-semibold text-lg transition disabled:opacity-50"
+              >
+                <i className="fa-solid fa-cart-shopping mr-2" />
+                Add to Cart
+              </button>
 
-                  {/* Quantity */}
-                  <div className="mb-6">
-                    <h3 className="font-poppins font-semibold text-lg mb-3 text-primary-text">Quantity</h3>
-                    <div className="flex items-center border border-divider rounded-lg w-32 bg-primary-card">
-                      <button className="px-3 py-2 text-primary-text hover:text-accent-red">-</button>
-                      <span className="px-3 py-2 border-l border-r border-divider text-center flex-1">1</span>
-                      <button className="px-3 py-2 text-primary-text hover:text-accent-red">+</button>
-                    </div>
-                  </div>
+              <button
+                disabled={product.stock === 0}
+                onClick={handleBuyNow}
+                className="w-full bg-primary-card border border-divider hover:border-accent-red text-primary-text hover:text-accent-red py-4 rounded-lg font-semibold transition disabled:opacity-50"
+              >
+                Buy Now
+              </button>
+            </div>
 
-                  {/* Action Buttons */}
-                  <div className="space-y-4 mb-6">
-                    <button className="w-full bg-accent-red hover:bg-accent-red/90 text-white py-4 rounded-lg font-semibold text-lg transition-colors">
-                      <i className="fa-solid fa-cart-shopping mr-2" />
-                      Add to Cart
-                    </button>
-                    <button className="w-full bg-primary-card border border-divider hover:border-accent-red text-primary-text hover:text-accent-red py-4 rounded-lg font-semibold transition-colors">
-                      Buy Now
-                    </button>
-                  </div>
-
-                  {/* Trust Signals */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                    <div className="flex items-center gap-2">
-                      <i className="fa-solid fa-truck-fast text-accent-green" />
-                      <span className="text-primary-muted">Free Delivery</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <i className="fa-solid fa-shield text-accent-green" />
-                      <span className="text-primary-muted">2 Year Warranty</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <i className="fa-solid fa-undo text-accent-green" />
-                      <span className="text-primary-muted">30 Day Returns</span>
-                    </div>
-                  </div>
-                </div>
+            {/* Trust */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-primary-muted pt-4 border-t border-divider">
+              <div className="flex items-center gap-2">
+                <i className="fa-solid fa-truck-fast text-accent-green" />
+                Free Delivery
+              </div>
+              <div className="flex items-center gap-2">
+                <i className="fa-solid fa-shield text-accent-green" />
+                2 Year Warranty
+              </div>
+              <div className="flex items-center gap-2">
+                <i className="fa-solid fa-rotate-left text-accent-green" />
+                30 Day Returns
               </div>
             </div>
           </div>
         </div>
       </section>
     </main>
-  );
-};
-
-export default ProductDetailsPage;
+  )
+}

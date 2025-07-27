@@ -14,10 +14,11 @@ export type Player = {
   email: string;
   phone: string;
   cvUrl: string;
-  image: string;
+  imageUrl: string;
   description: string;
   videoPrimary: [string];
   featured: boolean;
+  playerOfTheWeek: boolean;
   createdAt: string;
   updatedAt: string;
 };
@@ -41,22 +42,49 @@ export type User = {
 };
 
 export type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: [string];
-  featured: boolean;
-  createdAt: string;
-  updatedAt: string;
+  id: string
+  name: string
+  description: string
+  price: number
+  image: string[]
+  featured: boolean
+  discount?: number
+  createdAt: string
+  updatedAt: string
+  sizes: string[]
+  colors: string[]
+  stock: number
+  category: 'boots' | 'gloves' | 'kits' | 'ball' | 'accessory'
 }
 
 export interface Post {
   id: string;
   title: string;
   content: string;
-  imageUrl: [string];
+  summary: string;
+  imageUrl: string;
+  category: string;
   featured: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export type CartItem = {
+  id: string
+  name: string
+  price: number
+  quantity: number
+  image: string
+  size?: string
+  color?: string
+}
+
+export type OrderItem = {
+  id: string
+  name: string
+  description?: string
+  quantity: number
+  price: number
+  type: 'product' | 'subscription'
+  imageUrl?: string
 }

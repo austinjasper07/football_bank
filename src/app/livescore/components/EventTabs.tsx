@@ -10,7 +10,7 @@ export function EventTabs() {
         {tabs.map((tab, index) => (
           <Button
             key={tab}
-            className={`whitespace-nowrap ${index === 0 ? "bg-sport-football text-white hover:bg-sport-football/90" : ""}`}
+            className={`whitespace-nowrap ${index === 0 ? "bg-[hsl(var(--sport-football))] text-white hover:bg-[hsl(var(--sport-football))]/90" : ""}`}
           >
             {tab}
           </Button>

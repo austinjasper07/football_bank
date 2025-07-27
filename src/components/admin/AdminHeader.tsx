@@ -1,4 +1,6 @@
 import { Search, Bell, ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { FaUser } from "react-icons/fa";
 
 interface AdminHeaderProps {
   title: string;
@@ -32,11 +34,7 @@ export function AdminHeader({ title, subtitle }: AdminHeaderProps) {
           </button>
           
           <div className="flex items-center gap-2 cursor-pointer hover:bg-[var(--accent)] rounded-lg p-2">
-            <img 
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
-              alt="Admin" 
-              className="w-8 h-8 rounded-full"
-            />
+            <FaUser className="h-5 w-5 text-[hsl(var(--muted-foreground))] " />
             <span className="font-medium">Admin</span>
             <ChevronDown className="h-4 w-4 text-[hsl(var(--muted-foreground))] " />
           </div>

@@ -25,23 +25,25 @@ enum SubscriptionType {
 }
 
 model User {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  email      String   @unique
-  firstName  String
-  lastName   String
-  password   String
-  role       Role
-  subscribed Boolean
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id             String           @id @default(auto()) @map("_id") @db.ObjectId
+  email          String           @unique
+  firstName      String
+  lastName       String
+  password       String
+  role           Role
+  subscribed     Boolean
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 
-  playerRequests PlayerRequest[] 
-  subscriptions  Subscription[] 
+  playerRequests PlayerRequest[]
+  subscriptions  Subscription[]
+  paymentMethods PaymentMethod[]
+  pendingOrders  PendingOrder[] // back-relation
 }
 
 model PlayerRequest {
   id        String        @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String        @db.ObjectId  
+  userId    String        @db.ObjectId
   user      User          @relation(fields: [userId], references: [id])
   status    RequestStatus @default(PENDING)
   formData  Json
@@ -49,10 +51,9 @@ model PlayerRequest {
   updatedAt DateTime      @updatedAt
 }
 
-
 model Subscription {
   id        String           @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String          @db.ObjectId
+  userId    String           @db.ObjectId
   user      User             @relation(fields: [userId], references: [id])
   type      SubscriptionType
   isActive  Boolean          @default(true)
@@ -61,24 +62,25 @@ model Subscription {
 }
 
 model Player {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  firstName    String
-  lastName     String
-  dob          String
-  country      String
-  countryCode  String
-  position     String
-  height       String
-  weight       String
-  foot         String
-  email        String
-  phone        String
-  image        String
-  description  String
-  videoPrimary String[]
-  featured     Boolean
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName       String
+  lastName        String
+  dob             String
+  country         String
+  countryCode     String
+  position        String
+  height          String
+  weight          String
+  foot            String
+  email           String
+  phone           String
+  imageUrl        String
+  description     String
+  videoPrimary    String[]
+  featured        Boolean
+  playerOfTheWeek Boolean
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Product {
@@ -88,6 +90,11 @@ model Product {
   price       Float
   image       String[]
   featured    Boolean
+  discount    Float
+  sizes       String[]
+  colors      String[]
+  stock       Int
+  category    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -96,8 +103,30 @@ model Post {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   content   String
-  imageUrl  String[]
+  summary   String
+  category  String
+  imageUrl  String
   featured  Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model PendingOrder {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  type   String
+  items  Json
+
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model PaymentMethod {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId               String   @db.ObjectId
+  stripePaymentMethodId String
+  stripeCustomerId     String
+  isDefault            Boolean  @default(false)
+  createdAt            DateTime @default(now())
+
+  user                 User     @relation(fields: [userId], references: [id])
 }

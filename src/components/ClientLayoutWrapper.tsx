@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith("/admin");
+  const isHomePage = pathname === "/";
   const { loading } = useAuth();
 
   if (loading) {
@@ -20,7 +21,7 @@ export default function ClientLayoutWrapper({ children }: { children: React.Reac
         !isAdminPage && <Header />
       }
       
-      <main className={`${isAdminPage ? 'max-w-full' : 'max-w-6xl px-4 lg:px-0'} mx-auto `}>
+      <main className={`${isAdminPage || isHomePage ? 'max-w-full' : 'max-w-6xl px-4 lg:px-0'} mx-auto `}>
         {children}
       </main>
       {

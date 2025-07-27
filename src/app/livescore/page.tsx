@@ -7,8 +7,10 @@ import { Bet365Ad } from "./components/Bet365Ad";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-primary-bg text-foreground py-16">
-      <SportsHeader />
+    <div className="min-h-screen bg-primary-bg text-[hsl(var(--foreground))] py-16">
+      { false ? (
+        <>
+        <SportsHeader />
       
       <div className="flex flex-col lg:flex-row">
         <div className="hidden lg:block">
@@ -22,6 +24,13 @@ const Index = () => {
           <Bet365Ad />
         </div>
       </div>
+      </>) : (
+
+        <div className="flex flex-col items-center justify-center h-screen">
+          <p className="text-2xl font-bold">Coming Soon</p>
+        </div>
+      )
+      }
     </div>
   );
 };

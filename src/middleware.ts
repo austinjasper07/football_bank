@@ -5,7 +5,9 @@ import jwt from "jsonwebtoken";
 
 const PUBLIC_PATHS = ["/api/auth/signin", "/api/auth/signup"];
 
-export function middleware(req: NextRequest) {
+export default function middleware(req: NextRequest) {
+  console.log('🛡 Middleware triggered:', req.method, req.nextUrl.pathname);
+  
   const { pathname } = req.nextUrl;
 
   // ✅ Allow public auth paths
@@ -13,23 +15,29 @@ export function middleware(req: NextRequest) {
 
   // ✅ Allow public read-only APIs
   if (
-    pathname.startsWith("/api/user") ||
-    pathname.startsWith("/api/post") ||
-    (pathname.startsWith("/api/product") && req.method === "GET")
+    (pathname.startsWith("/api/posts") && req.method === "GET") ||
+    (pathname.startsWith("/api/players") && req.method === "GET") ||
+    (pathname.startsWith("/api/products") && req.method === "GET")
   ) {
     return NextResponse.next();
   }
 
   // ✅ Require token for all other /api paths
   const token = req.headers.get("authorization")?.split(" ")[1];
-  if (!token) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!token)
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { role: string };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+      role: string;
+    };
 
     // 🔐 Admin-only routes
     if (pathname.startsWith("/api/admin") && decoded.role !== "admin") {
-      return NextResponse.json({ error: "Forbidden: Admins only" }, { status: 403 });
+      return NextResponse.json(
+        { error: "Forbidden: Admins only" },
+        { status: 403 }
+      );
     }
 
     // 🔐 Player modification restricted to admins
@@ -38,7 +46,10 @@ export function middleware(req: NextRequest) {
       ["POST", "PATCH", "DELETE"].includes(req.method) &&
       decoded.role !== "admin"
     ) {
-      return NextResponse.json({ error: "Forbidden: Admins only for write actions" }, { status: 403 });
+      return NextResponse.json(
+        { error: "Forbidden: Admins only for write actions" },
+        { status: 403 }
+      );
     }
 
     // 🔐 Player request route — allow any authenticated user (verify subscription in route)

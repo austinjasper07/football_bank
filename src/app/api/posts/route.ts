@@ -7,6 +7,11 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const token = req.headers.get('authorization')?.split(' ')[1];
+
+  if (!token) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   const body = await req.json();
   const post = await prisma.post.create({ data: body });
   return NextResponse.json(post, { status: 201 });
