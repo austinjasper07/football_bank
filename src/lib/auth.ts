@@ -1,25 +1,24 @@
-// lib/auth.ts
-import { cookies } from 'next/headers'
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
-const JWT_SECRET = process.env.JWT_SECRET!
+const JWT_SECRET = process.env.JWT_SECRET!;
 
-type UserPayload = {
-  id: string
-  email: string
+export function signJwt(payload: object) {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
 }
 
-export async function getUserFromToken(): Promise<UserPayload | null> {
-  const cookieStore = await cookies()
-  const token = cookieStore.get('auth_token')?.value
-
-  if (!token) return null
-
+export function verifyJwt(token: string) {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as UserPayload
-    return decoded
-  } catch (err) {
-    console.error('Invalid token:', err)
-    return null
+    return jwt.verify(token, JWT_SECRET) as { id: string; role: string };
+  } catch {
+    return null;
   }
+}
+
+export async function hashPassword(password: string) {
+  return await bcrypt.hash(password, 10);
+}
+
+export async function verifyPassword(plain: string, hashed: string) {
+  return await bcrypt.compare(plain, hashed);
 }

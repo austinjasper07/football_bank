@@ -22,67 +22,92 @@ export default async function HomePage() {
     (player: Player) => player.playerOfTheWeek === true
   );
 
+  const today = new Date();
+  const birthDate = new Date(playerOfTheWeek?.dob);
+  const age = today.getFullYear() - birthDate.getFullYear();
+
   return (
     <div className="bg-[#F9FAFB]">
       {/* Hero Section */}
-      <div className="px-10 flex flex-row relative h-[600px] items-center bg-gradient-to-br from-primary-bg via-gray-50 to-blue-50 overflow-hidden">
-        <section className="w-[50%] flex items-center">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute w-64 h-64 rounded-full bg-accent-red blur-3xl -top-20 -left-20"></div>
-            <div className="absolute w-64 h-64 rounded-full bg-accent-green blur-3xl bottom-20 right-20"></div>
-          </div>
-          <div className="container mx-auto px-4 z-10">
-            <div className="max-w-3xl">
-              <h1 className="font-poppins font-bold text-5xl lg:text-6xl leading-tight mb-6 text-primary-text">
-                Empowering Football{" "}
-                <span className="text-accent-red">Talent</span> Worldwide
-              </h1>
-              <p className="text-primary-muted text-lg mb-8 font-inter">
-                Connecting exceptional players with opportunities. Showcase your
-                skills, get discovered, and take your football career to the
-                next level.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/submit-profile">
-                  <span className="bg-accent-red text-white px-6 py-3 rounded-md font-medium text-center transition-colors hover:bg-blue-600 cursor-pointer">
-                    Submit Your Profile
-                  </span>
-                </Link>
-                <Link href="/players">
-                  <span className="border border-divider hover:border-accent-red text-primary-text px-6 py-3 rounded-md font-medium text-center transition-colors cursor-pointer">
-                    Browse Players
-                  </span>
-                </Link>
-              </div>
+      <div className="relative min-h-screen md:h-screen w-full  bg-gradient-to-br from-[#f0f4ff] via-[#e0e7ff] to-[#fff] overflow-hidden px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between">
+        {/* Color Blobs */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute w-96 h-96 bg-accent-red rounded-full blur-[120px] -top-24 -left-20 opacity-30"></div>
+          <div className="absolute w-80 h-80 bg-accent-green rounded-full blur-[100px] bottom-10 right-10 opacity-30"></div>
+        </div>
+
+        {/* Left Content */}
+        <section className="z-10 w-full lg:w-[50%] mt-8 md:mt-0 h-full flex items-center justify-center lg:justify-start text-center lg:text-left">
+          <div className="max-w-2xl space-y-6 h-1/2">
+            <h1 className="font-poppins font-bold text-5xl lg:text-6xl leading-tight  text-primary-text bg-clip-text">
+              Empowering Football{" "}
+              <span className="text-accent-red">Talent</span> Worldwide
+            </h1>
+            <p className="text-primary-muted text-lg font-inter">
+              Connecting exceptional players with opportunities. Showcase your
+              skills, get discovered, and take your football career to the next
+              level.
+            </p>
+            <div className="flex sm:flex-row gap-4 justify-center lg:justify-start">
+              <Link href="/submit-profile">
+                <span className="bg-accent-red text-white px-6 py-3 rounded-md font-medium text-center transition-all hover:opacity-90 shadow-lg">
+                  Submit Your Profile
+                </span>
+              </Link>
+              <Link href="/players">
+                <span className="border-2 border-accent-red text-accent-red px-6 py-3 rounded-md font-medium text-center transition hover:bg-accent-red hover:text-white shadow-sm">
+                  Browse Players
+                </span>
+              </Link>
             </div>
           </div>
         </section>
 
-        <section className="w-[50%] h-full  mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
-          <div className="relative bg-white h-full w-full p-8 rounded-xl shadow-lg text-center hover:shadow-md transition-all flex flex-row-reverse gap-8">
-            <div className="absolute top-1 right-0 rounded-2xl bg-accent-red/80 text-white p-2 flex items-center justify-center">
-              Player of the Moment
+        {/* Player of the Moment Card */}
+        <section className="relative z-10 w-full lg:w-[50%] h-full flex justify-center items-center p-4">
+          <div className="relative w-full h-2/3 max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-row-reverse gap-6 p-6">
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <div className="absolute w-96 h-96 bg-accent-red rounded-full blur-[120px] -top-24 -left-20 opacity-30"></div>
+              <div className="absolute w-80 h-80 bg-accent-green rounded-full blur-[100px] bottom-10 right-10 opacity-30"></div>
+            </div>
+            {/* Badge */}
+            <div className="absolute top-4 right-4 z-20 bg-accent-red/90 text-white px-3 py-1 text-xs rounded-full shadow">
+              Star on the rise
             </div>
 
-            <div className="relative w-[70%] h-full bg-[#1F6FEB]/10 rounded-md mb-6">
+            {/* Image */}
+            <div className="relative w-full h-full rounded-xl shadow-lg">
               <Image
-                src={playerOfTheWeek?.imageUrl}
+                src={playerOfTheWeek?.imageUrl?.[0] || "/placeholder.jpg"}
                 alt={`${playerOfTheWeek?.firstName} ${playerOfTheWeek?.lastName}`}
-                width={64}
-                height={64}
-                fill
-                style={{ objectFit: "cover" }}
+                width={340}
+                height={340}
+                className="object-cover w-full h-full rounded-xl "
               />
             </div>
-            <div className="text-left h-full w-[30%] overflow-hidden">
-              <h3 className="text-2xl font-poppins font-bold text-[#111827] mb-2">
-                {`${playerOfTheWeek?.firstName} ${playerOfTheWeek?.lastName}`}
+
+            {/* Info */}
+            <div className="w-full">
+              <h3 className="text-xl font-bold text-[#111827] font-poppins my-3">
+                {playerOfTheWeek?.firstName} {playerOfTheWeek?.lastName}
               </h3>
-              <p className="text-primary-muted text-lg">
+              <p className="text-accent-red font-semibold mb-2">
+                <span className="font-semibold text-primary-muted">
+                  Position:{" "}
+                </span>
                 {playerOfTheWeek?.position}
               </p>
-              <p>
-                {playerOfTheWeek?.summary?.slice(0, 100) + "..."}
+              <p className="text-accent-red font-semibold mb-2">
+                <span className="font-semibold text-primary-muted">Age: </span>
+                {age}
+              </p>
+              <p className="text-accent-red font-semibold mb-2">
+                <span className="font-semibold text-primary-muted">Foot: </span>
+                {playerOfTheWeek?.foot}
+              </p>
+              <p className="text-gray-600 text-sm line-clamp-4">
+                {playerOfTheWeek?.description?.slice(0, 180) ||
+                  "This player stands out for their dedication, talent and extraordinary performance on the pitch."}
               </p>
             </div>
           </div>
@@ -147,34 +172,38 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredPlayers.map((player: Player) => (
-                <div
-                  key={player.id}
-                  className="bg-primary-card rounded-lg overflow-hidden border border-divider shadow-sm"
-                >
-                  <div className="relative aspect-[4/5]">
-                    <Image
-                      src={player.imageUrl}
-                      alt={`Player ${player.firstName} ${player.lastName}`}
-                      fill
-                      className="object-cover"
-                    />
+              {featuredPlayers ? (
+                featuredPlayers.map((player: Player) => (
+                  <div
+                    key={player.id}
+                    className="bg-primary-card rounded-lg overflow-hidden border border-divider shadow-sm"
+                  >
+                    <div className="relative aspect-[4/5]">
+                      <Image
+                        src={player.imageUrl[0]}
+                        alt={`Player ${player.firstName} ${player.lastName}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-poppins font-semibold text-xl mb-1 text-primary-text">
+                        {player.firstName} {player.lastName}
+                      </h3>
+                      <p className="text-primary-muted text-sm mb-4">
+                        {player?.description?.slice(0, 180)}
+                      </p>
+                      <Link href={`/players/player-${player.id}`}>
+                        <span className="block text-center bg-accent-red text-white py-2 rounded hover:bg-blue-600 transition-colors cursor-pointer">
+                          View Profile
+                        </span>
+                      </Link>
+                    </div>
                   </div>
-                  <div className="p-4">
-                    <h3 className="font-poppins font-semibold text-xl mb-1 text-primary-text">
-                      {player.firstName} {player.lastName}
-                    </h3>
-                    <p className="text-primary-muted text-sm mb-4">
-                      Short player description goes here.
-                    </p>
-                    <Link href={`/players/player-${player.id}`}>
-                      <span className="block text-center bg-accent-red text-white py-2 rounded hover:bg-blue-600 transition-colors cursor-pointer">
-                        View Profile
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <h4>No Featured Players</h4>
+              )}
             </div>
           </div>
         </section>

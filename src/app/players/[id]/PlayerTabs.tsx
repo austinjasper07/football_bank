@@ -7,17 +7,21 @@ type TabType = 'stats' | 'videos' | 'availability'
 
 export default function PlayerTabs({ player }: { player: Player }) {
   const [tab, setTab] = useState<TabType>('stats')
-  const [selectedVideo, setSelectedVideo] = useState<string>(player.videoPrimary?.[0] || '')
+  const [selectedVideo, setSelectedVideo] = useState<string>(player.videoPrimary || '')
+
+  console.log(selectedVideo);
 
   const videoTitles: Record<string, string> = {
-    [player.videoPrimary[0]]: 'Primary Highlights',
+    [player.videoPrimary]: 'Primary Highlights',
   }
 
   // Add dynamic additional videos if they exist
-  const additionalVideos = player.videoPrimary.slice(1)
-  additionalVideos.forEach((video, index) => {
+  
+  player.videoAdditional.forEach((video, index) => {
     videoTitles[video] = `Additional Video ${index + 1}`
   })
+
+  
 
   return (
     <section className="py-16 border-y border-divider bg-primary-bg">
@@ -63,12 +67,7 @@ export default function PlayerTabs({ player }: { player: Player }) {
             {/* Selected Video Preview */}
             <div className="bg-primary-bg rounded-lg overflow-hidden border border-divider">
               <div className="aspect-video">
-                <iframe
-                  src={selectedVideo}
-                  title="Player Video"
-                  className="w-full h-full"
-                  allowFullScreen
-                />
+                <video src={selectedVideo} controls className='w-full h-full'></video>
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-lg mb-2">

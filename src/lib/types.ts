@@ -14,19 +14,22 @@ export type Player = {
   email: string;
   phone: string;
   cvUrl: string;
-  imageUrl: string;
+  imageUrl: string[];
   description: string;
-  videoPrimary: [string];
+  videoPrimary: string;
+  videoAdditional: string[];
   featured: boolean;
   playerOfTheWeek: boolean;
   createdAt: string;
   updatedAt: string;
 };
 
-enum Role {
+export enum Role {
   admin,
   user,
-  player
+  player,
+  scout,
+  club,
 }
 
 export type User = {
@@ -34,7 +37,7 @@ export type User = {
   email: string;
   firstName: string;
   lastName: string;
-  role: Role;
+  role: string;
   password: string;
   subscribed: boolean;
   createdAt: string;
@@ -62,9 +65,13 @@ export interface Post {
   title: string;
   content: string;
   summary: string;
+  author: string;
   imageUrl: string;
   category: string;
+  status: "Draft" | "Published" | "Archived";
   featured: boolean;
+   tags?: string[];
+  views: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -88,3 +95,40 @@ export type OrderItem = {
   type: 'product' | 'subscription'
   imageUrl?: string
 }
+export type Order = {
+  id: string
+  userId: string
+  items: Array<{ name: string; quantity: number; price: number }>
+  status: 'pending' | 'completed' | 'cancelled'
+  createdAt: string
+}
+
+export type Message = {
+  id: string
+  name: string
+  email: string
+  subject: string
+  read: boolean;
+  content: string
+  createdAt: string
+}
+
+export type SubmissionStatus = "pending" | "approved" | "rejected";
+
+export type Submission = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  country: string;
+  position: string;
+  age: number;
+  location: string;
+  submittedAt: string;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+  bio: string;
+  experience: string;
+  achievements: string[];
+  documents: string[];
+  rejectionReason?: string;
+};

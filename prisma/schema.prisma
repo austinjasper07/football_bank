@@ -25,20 +25,22 @@ enum SubscriptionType {
 }
 
 model User {
-  id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  email          String           @unique
-  firstName      String
-  lastName       String
-  password       String
-  role           Role
-  subscribed     Boolean
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  email      String   @unique
+  firstName  String
+  lastName   String
+  password   String
+  role       Role
+  subscribed Boolean
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  orders Order[] 
   playerRequests PlayerRequest[]
   subscriptions  Subscription[]
   paymentMethods PaymentMethod[]
   pendingOrders  PendingOrder[] // back-relation
+
+  Submission Submission[]
 }
 
 model PlayerRequest {
@@ -74,9 +76,11 @@ model Player {
   foot            String
   email           String
   phone           String
-  imageUrl        String
+  imageUrl        String[]
+  cvUrl           String
   description     String
-  videoPrimary    String[]
+  videoPrimary    String
+  videoAdditional String[]
   featured        Boolean
   playerOfTheWeek Boolean
   createdAt       DateTime @default(now())
@@ -117,16 +121,67 @@ model PendingOrder {
   type   String
   items  Json
 
-  user   User   @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
 
 model PaymentMethod {
-  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId               String   @db.ObjectId
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId                String   @db.ObjectId
   stripePaymentMethodId String
-  stripeCustomerId     String
-  isDefault            Boolean  @default(false)
-  createdAt            DateTime @default(now())
+  stripeCustomerId      String
+  isDefault             Boolean  @default(false)
+  createdAt             DateTime @default(now())
 
-  user                 User     @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Order {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String         @db.ObjectId
+  user      User           @relation(fields: [userId], references: [id])
+  items     OrderItem[]    
+  status    OrderStatus    @default(pending)
+  createdAt DateTime       @default(now())
+}
+model OrderItem {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  orderId  String  @db.ObjectId
+  order    Order   @relation(fields: [orderId], references: [id])
+  name     String
+  quantity Int
+  price    Float
+}
+enum OrderStatus {
+  pending
+  completed
+  cancelled
+}
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  subject   String
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model Submission {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  email            String
+  phone            String
+  country          String
+  position         String
+  age              Int
+  location         String
+  submittedAt      DateTime @default(now())
+  status           RequestStatus @default(PENDING)
+  bio              String
+  experience       String
+  achievements     String[]
+  documents        String[]
+  rejectionReason  String?
+
+  userId           String?  @db.ObjectId
+  user             User?    @relation(fields: [userId], references: [id])
 }

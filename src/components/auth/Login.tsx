@@ -39,6 +39,7 @@ export default function Login({
           <div className="relative">
             <input
               type="email"
+              name="email"
               className="w-full bg-primary-bg border border-divider rounded-lg px-4 py-3"
               placeholder="Enter your email"
               required
@@ -52,6 +53,7 @@ export default function Login({
           <div className="relative">
             <input
               type={showPassword.login ? "text" : "password"}
+              name="password"
               className="w-full bg-primary-bg border border-divider rounded-lg px-4 py-3 pr-10"
               placeholder="Enter your password"
               required

@@ -3,10 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     domains: [
+      "firebasestorage.googleapis.com",
       "storage.googleapis.com",
-      "flagcdn.com",
-      "myProfile.com",
-      "http://www.myprofile.com",
+      "flagcdn.com"
     ],
   },
   // This is required to ensure middleware behaves as expected

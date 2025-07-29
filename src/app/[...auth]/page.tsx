@@ -1,27 +1,49 @@
 "use client";
+
 import { useState, FormEvent, useEffect } from "react";
 import Head from "next/head";
 import { notFound, usePathname } from "next/navigation";
-import { FaKey, FaCheck } from "react-icons/fa";
 import SignUp from "@/components/auth/SignUp";
 import Login from "@/components/auth/Login";
-import ForgotPassword, { ForgotPasswordSuccess } from "@/components/auth/ForgotPassword";
+import ForgotPassword, {
+  ForgotPasswordSuccess,
+} from "@/components/auth/ForgotPassword";
+import { useToast } from "@/hooks/use-toast";
+import { useAdminDataStore } from "@/store/adminDataStore";
+import { useRouter } from "next/navigation";
 
 export type AuthView = "" | "login" | "signup" | "forgot";
 
 export default function AuthPage() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { toast } = useToast();
+  const { signup, login,  } = useAdminDataStore();
+  // const currentUser = useAdminDataStore.getState().activeUser;
+  // const activeUser = currentUser;
+  // console.log(activeUser);
   const [view, setView] = useState<AuthView>("");
-  const [showPassword, setShowPassword] = useState<{ login: boolean }>({login: false,});
   const [loading, setLoading] = useState(false);
   const [forgotSuccess, setForgotSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState<{
+    login: boolean;
+    signup: boolean;
+  }>({
+    login: false,
+    signup: false,
+  });
   const [passwordStrength, setPasswordStrength] = useState(0);
-  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname.includes("/auth/login")) setView("login");
+    else if (pathname.includes("/auth/signup")) setView("signup");
+    else if (pathname.includes("/auth/forgot-password")) setView("forgot");
+    else notFound();
+  }, [pathname]);
 
   const togglePassword = (field: string) => {
-    setShowPassword((prev) => ({
-      ...prev,
-      [field as keyof typeof prev]: !prev[field as keyof typeof prev],
-    }));
+    if (field !== "login" && field !== "signup") return;
+    setShowPassword((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
   const getStrength = (value: string) => {
@@ -33,32 +55,113 @@ export default function AuthPage() {
     return strength;
   };
 
-  useEffect(() => {
-    if (pathname.includes("/auth/login")) {
-      setView("login");
-    } else if (pathname.includes("/auth/signup")) {
-      setView("signup");
-    } else if (pathname.includes("/auth/forgot-password")) {
-      setView("forgot");
-    } else {
-      notFound();
-    }
-  }, [pathname]);
-
-  const handleSubmit = (e: FormEvent, type: AuthView) => {
+  const handleSubmit = async (e: FormEvent, type: AuthView) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-      if (type === "forgot") {
-        setForgotSuccess(true);
-      } else {
-        alert(
-          `${type === "login" ? "Logged in" : "Account created"} successfully!`
-        );
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    if (type === "signup") {
+      const { email, password, confirmPassword, firstName, lastName, role } =
+        data;
+
+      if (
+        !email ||
+        !password ||
+        !confirmPassword ||
+        !firstName ||
+        !lastName ||
+        !role
+      ) {
+        toast({ title: "Error", description: "All fields are required." });
+        setLoading(false);
+        return;
       }
-    }, 2000);
+
+      if (password !== confirmPassword) {
+        toast({ title: "Error", description: "Passwords do not match." });
+        setLoading(false);
+        return;
+      }
+
+      if ((password as string).length < 8) {
+        toast({
+          title: "Error",
+          description: "Password must be at least 8 characters.",
+        });
+        setLoading(false);
+        return;
+      }
+
+      try {
+        await signup({
+          id: "", // or leave undefined if backend generates it
+          email: data.email as string,
+          password: data.password as string,
+          firstName: data.firstName as string,
+          lastName: data.lastName as string,
+          role: data.role as string,
+          subscribed: false,
+          createdAt: "",
+          updatedAt: "",
+        });
+
+        toast({
+          title: "Account Created",
+          description: "You have been logged in.",
+        });
+        const currentUser = useAdminDataStore.getState().activeUser;
+        console.log(currentUser);
+        if (currentUser && currentUser.role === "admin") {
+          router.replace("/admin");
+        }else{
+          router.replace("/");
+        }
+      } catch (error) {
+        toast({ title: "Signup Error", description: "Failed to register." });
+      } finally {
+        setLoading(false);
+      }
+
+      return;
+    }
+
+    if (type === "login") {
+      const { email, password } = data;
+
+      if (!email || !password) {
+        toast({
+          title: "Error",
+          description: "Email and password are required.",
+        });
+        setLoading(false);
+        return;
+      }
+      try {
+        await login({ email: email as string, password: password as string });
+        toast({ title: "Logged In", description: "Welcome back!" });
+        setLoading(false);
+        const currentUser = useAdminDataStore.getState().activeUser;
+        console.log(currentUser);
+        if (currentUser && currentUser.role === "admin") {
+          router.replace("/admin");
+        }else{
+          router.replace("/");
+        }
+        return;
+      } catch (error) {
+        toast({ title: "Login Error", description: "Failed to log in." });
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (type === "forgot") {
+      setForgotSuccess(true);
+      setLoading(false);
+    }
   };
 
   const strengthColors = [
@@ -85,7 +188,7 @@ export default function AuthPage() {
                   loading,
                   togglePassword,
                   showPassword,
-                  setView: (view: string) => setView(view as AuthView),
+                  setView: (v: string) => setView(v as AuthView),
                 }}
               />
             )}
@@ -109,7 +212,7 @@ export default function AuthPage() {
             {view === "forgot" && (
               <>
                 {!forgotSuccess ? (
-                 <ForgotPassword {...{ handleSubmit, loading }} />
+                  <ForgotPassword {...{ handleSubmit, loading }} />
                 ) : (
                   <ForgotPasswordSuccess />
                 )}

@@ -1,21 +1,23 @@
-import { prisma } from '@/lib/prisma';
-import { NextRequest, NextResponse } from 'next/server';
-import { ObjectId } from 'mongodb';
+import { verifyJwt } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
-export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
-  if (!ObjectId.isValid(params.id)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
-  const post = await prisma.post.findUnique({ where: { id: params.id } });
-  if (!post) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-  return NextResponse.json(post);
+export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+  const token = (await cookies()).get('authToken')?.value;
+  const admin = verifyJwt(token || '');
+  if (!admin || admin.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
+  const body = await req.json();
+  const updated = await prisma.post.update({ where: { id: params.id }, data: body });
+  return NextResponse.json(updated);
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const data = await req.json();
-  const post = await prisma.post.update({ where: { id: params.id }, data });
-  return NextResponse.json(post);
-}
+export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+  const token = (await cookies()).get('authToken')?.value;
+  const admin = verifyJwt(token || '');
+  if (!admin || admin.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
-export async function DELETE(_: NextRequest, { params }: { params: { id: string } }) {
-  const deleted = await prisma.post.delete({ where: { id: params.id } });
-  return NextResponse.json(deleted);
+  await prisma.post.delete({ where: { id: params.id } });
+  return NextResponse.json({ success: true });
 }

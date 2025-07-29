@@ -3,30 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, X, Eye, Mail, Phone, MapPin, Calendar, Trophy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Submission } from "@/lib/types";
 
-export interface Submission {
-  id: number;
-  name: string;
-  country: string;
-  position: string;
-  age: number;
-  submittedAt: string;
-  status: string;
-  email?: string;
-  phone?: string;
-  location?: string;
-  bio?: string;
-  experience?: string;
-  achievements?: string[];
-  documents?: string[];
-}
+
 
 interface SubmissionDetailDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   submission: Submission | null;
-  onApprove: (id: number) => void;
-  onReject: (id: number, reason?: string) => void;
+  onApprove: (id: string) => void;
+  onReject: (id: string, reason?: string) => void;
 }
 
 export function SubmissionDetailDialog({ 

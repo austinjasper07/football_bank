@@ -130,7 +130,7 @@ export default function PlayerPortfolioPage() {
                   >
                     <div className="relative w-full h-[320px]">
                       <Image
-                        src={player.image}
+                        src={player.imageUrl[0]}
                         alt={fullName}
                         fill
                         style={{ objectFit: 'cover' }}

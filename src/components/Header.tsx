@@ -1,5 +1,5 @@
 'use client'
-
+import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
 import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -35,7 +35,7 @@ export default function Header() {
         <div className=" flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="font-poppins font-bold text-2xl text-accent-blue cursor-pointer flex items-center gap-2">
-          <div className="relative w-30 h-28">
+          <div className="relative w-16 h-16 md:w-30 md:h-28">
             <Image src="/logo.png" alt="FootballBank Logo"  fill className="object-contain" />
           </div>
             
@@ -75,12 +75,14 @@ export default function Header() {
                 )}
               </Link>
             )}
-            <Link
-              href="/signup"
-              className="hidden lg:block bg-accent-red hover:bg-opacity-90 text-white px-4 py-2 rounded-md font-medium text-nowrap"
+            {/* <Link
+              href="/auth/login"
+              
             >
-              Sign Up
-            </Link>
+              Login
+            </Link> */}
+            <LoginLink  className="hidden lg:block bg-accent-red hover:bg-opacity-90 text-white px-4 py-2 rounded-md font-medium text-nowrap">Sign in</LoginLink>
+
             <button onClick={toggleMenu} className="lg:hidden text-primary-text">
               {menuOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
             </button>
@@ -107,13 +109,14 @@ export default function Header() {
               {label}
             </Link>
           ))}
-          <Link
-            href="/signup"
-            className="bg-accent-red text-white text-center py-2 rounded-md"
-            onClick={() => setMenuOpen(false)}
+          {/* <Link
+            href="/auth/login"
+            
+            
           >
-            Sign Up
-          </Link>
+            Login
+          </Link> */}
+          <LoginLink onClick={() => setMenuOpen(false)} className="bg-accent-red text-white text-center py-2 rounded-md">Sign in</LoginLink>
         </div>
       </div>
 

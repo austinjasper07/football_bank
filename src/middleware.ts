@@ -1,68 +1,72 @@
-// /middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
-import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
 
-const PUBLIC_PATHS = ["/api/auth/signin", "/api/auth/signup"];
+  const publicRoutes = [
+    '/api/player',
+    '/api/product',
+    '/api/post',
+  ];
 
-export default function middleware(req: NextRequest) {
-  console.log('🛡 Middleware triggered:', req.method, req.nextUrl.pathname);
-  
-  const { pathname } = req.nextUrl;
+  const protectedRoutes = [
+    '/api/player/profile-submission',
+  ];
 
-  // ✅ Allow public auth paths
-  if (PUBLIC_PATHS.includes(pathname)) return NextResponse.next();
+  const adminRoutePrefixes = [
+    '/api/admin',
+  ];
 
-  // ✅ Allow public read-only APIs
-  if (
-    (pathname.startsWith("/api/posts") && req.method === "GET") ||
-    (pathname.startsWith("/api/players") && req.method === "GET") ||
-    (pathname.startsWith("/api/products") && req.method === "GET")
-  ) {
-    return NextResponse.next();
+  const isPublic = publicRoutes.some(route =>
+    pathname === route || pathname.startsWith(route + '/')
+  );
+
+  if (isPublic) return NextResponse.next();
+
+  // Grab session with Kinde
+  const { getUser, getRoles } = getKindeServerSession();
+
+  const user = await getUser();
+
+  if (!user) {
+    return NextResponse.json(
+      { error: 'Authentication required' },
+      { status: 401 }
+    );
   }
 
-  // ✅ Require token for all other /api paths
-  const token = req.headers.get("authorization")?.split(" ")[1];
-  if (!token)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // Protected route access (any logged-in user)
+  const isProtected = protectedRoutes.some(route =>
+    pathname === route || pathname.startsWith(route + '/')
+  );
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
-      role: string;
-    };
+  if (isProtected) return NextResponse.next();
 
-    // 🔐 Admin-only routes
-    if (pathname.startsWith("/api/admin") && decoded.role !== "admin") {
+  // Admin route check: validate permissions or roles
+  const isAdminRoute = adminRoutePrefixes.some(prefix =>
+    pathname === prefix || pathname.startsWith(prefix + '/')
+  );
+
+  if (isAdminRoute) {
+    const canAccess = await getRoles();
+    if (!canAccess) {
       return NextResponse.json(
-        { error: "Forbidden: Admins only" },
+        { error: 'Admin access required' },
         { status: 403 }
       );
     }
-
-    // 🔐 Player modification restricted to admins
-    if (
-      pathname.startsWith("/api/player") &&
-      ["POST", "PATCH", "DELETE"].includes(req.method) &&
-      decoded.role !== "admin"
-    ) {
-      return NextResponse.json(
-        { error: "Forbidden: Admins only for write actions" },
-        { status: 403 }
-      );
-    }
-
-    // 🔐 Player request route — allow any authenticated user (verify subscription in route)
-    if (pathname.startsWith("/api/player-request")) {
-      return NextResponse.next(); // ✅ already verified token
-    }
-
-    return NextResponse.next();
-  } catch {
-    return NextResponse.json({ error: "Invalid token" }, { status: 403 });
   }
+
+  // Default: allowed
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/api/:path*"], // Apply to all API routes
+  matcher: [
+    '/api/:path*',
+    '/api/admin/:path*',
+    '/api/player/profile-submission', // or any protected route
+  ],
 };

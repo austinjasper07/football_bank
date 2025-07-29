@@ -1,13 +1,8 @@
-import { prisma } from '@/lib/prisma';
-import { NextRequest, NextResponse } from 'next/server';
-import { ObjectId } from 'mongodb';
+import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
 
-export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
-  if (!ObjectId.isValid(params.id))
-    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
-
+export async function GET(_: Request, { params }: { params: { id: string } }) {
   const post = await prisma.post.findUnique({ where: { id: params.id } });
-  if (!post) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-
+  if (!post) return NextResponse.json({ error: 'Post not found' }, { status: 404 });
   return NextResponse.json(post);
 }
